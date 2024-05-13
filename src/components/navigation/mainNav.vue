@@ -15,6 +15,9 @@
         <li>
           <RouterLink to="Login" class="text-2xl mx-2 dark:text-white">login</RouterLink>
         </li>
+        <li>
+          <RouterLink to="Tracks" class="text-2xl mx-2 dark:text-white">Tracks</RouterLink>
+        </li>
       </ul>
     </div>
     <div class="navbar-end">
