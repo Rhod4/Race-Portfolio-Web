@@ -44,10 +44,10 @@
       </div>
     </div>
     <div class="mt-5">
-      <div class="grid grid-cols-3" v-show="format === true">
-        <div class="card bg-base-100 shadow-xl m-2" v-for="track in tracks.tracks.filter(value =>
+      <div class="grid grid-cols-3 justify-items-center" v-show="format === true">
+        <div class="card bg-base-100 shadow-xl m-2 max-w-[20rem]" v-for="track in tracks.tracks.filter(value =>
           trackSearch ? value.name.toLowerCase().includes(trackSearch.toLowerCase()) : true)" :key="track.id">
-          <figure><img src="/public/favicon.ico" alt="Shoes" class="object-cover" /></figure>
+          <figure><img :src="'/src/assets/images/tracks/'+track.id+'.png'" :alt="track.name" class="object-fill" /></figure>
           <div class="card-body">
             <h2 class="card-title">{{track.name}}</h2>
             <p></p>
