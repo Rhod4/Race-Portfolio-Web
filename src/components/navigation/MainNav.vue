@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="navbar  drop-shadow bg-gray-300 dark:bg-neutral">
+  <div class="navbar drop-shadow bg-gray-300 dark:bg-neutral mb-4">
     <div class="navbar-start">
       <RouterLink to="Home" class="text-2xl mx-2 dark:text-white">RP</RouterLink>
     </div>
