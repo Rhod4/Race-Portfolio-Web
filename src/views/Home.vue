@@ -1,31 +1,19 @@
 <script setup>
 
-import axios from "axios";
-import {onMounted} from "vue";
 
-function getRaces() {
-  axios.get("Race/GetRaces")
-      .then(response => {
-        // Process the response data here
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error("There was a problem with the Axios request:", error);
-      });
-}
-
-  onMounted(()=>{
-    console.log("t");
-    getRaces()});
-
-
+import RaceMainBanner from "@/components/dashboard/RaceMainBanner.vue";
 </script>
 
 <template>
-  <div><p>home</p></div>
-  <RouterLink to="/Login">HOMEBUTTON</RouterLink>
+  <div class="py-32">
+    <div class="flex flex-col align-middle">
+      <span class="text-6xl mx-auto">GREEN GREEN GREEN</span>
+      <span class="mx-auto mt-4">Welcome to the new hub for sim races</span>
+      <span class="mx-auto">Create or join leagues and race</span>
+    </div>
+  </div>
+  <RaceMainBanner></RaceMainBanner>
 </template>
 
 <style scoped>
-
 </style>
