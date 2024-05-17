@@ -7,13 +7,18 @@ import axios from "axios";
 
 const app = createApp(App)
 
-axios.defaults.baseURL = 'http://localhost:8080/api/';
+axios.defaults.baseURL ="http://localhost:8080/"
 
 const instance = axios.create({
-   baseURL: 'http://localhost:8081/api/',
+   baseURL: 'http://localhost:8080/',
    timeout: 1000,
+   params: {
+       },
+   withCredentials: true,
 });
 
-app.use(router, instance)
+app.config.globalProperties.$axios = instance;
+
+app.use(router)
 app.mount('#app')
 

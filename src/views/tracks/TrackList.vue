@@ -13,7 +13,7 @@ let loading = ref(false);
 
 onMounted(() => {
   loading.value = true
-  axios.get("Track/AllTracks",).then(
+  axios.get("api/Track/AllTracks",).then(
       (response) => {
         tracks.push(...response.data.success)
 

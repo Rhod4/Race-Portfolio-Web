@@ -1,16 +1,12 @@
 <script setup>
   import auth from "/src/functions/auth.js"
-  import axios from "axios";
 
   const logout = async () => {
     await auth.postLogout();
   }
 
   const test = async () => {
-      await axios.get("Auth/test")
-          .then((response)=> console.log(response))
-          .catch((error) =>console.log(error))
-
+    await auth.profileTest()
   }
 
 </script>

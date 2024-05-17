@@ -8,7 +8,7 @@ const races = reactive([]);
 
 const getRaces = async () => {
 
-  axios.get("Race/Races")
+  axios.get("api/Race/Races")
       .then(response => {
         races.push(...response.data.success.map(item => ({ ...item })), ...response.data.success.map(item => ({ ...item })))
       })

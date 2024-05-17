@@ -6,7 +6,7 @@ import {onMounted} from "vue";
 let races = [];
 
 function getRaces() {
-  axios.get("Race/Races")
+  axios.get("api/Race/Races")
       .then(response => {
         // Process the response data here
         races = response.data;
