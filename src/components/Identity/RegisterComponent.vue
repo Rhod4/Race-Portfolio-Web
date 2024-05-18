@@ -2,7 +2,9 @@
 import {email, helpers, required, sameAs} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import {computed, reactive} from "vue";
-import auth from "@/functions/auth.js";
+import {authValidation} from "@/functions/auth.js";
+
+const auth = authValidation();
 
 let user = reactive({
   email: "",

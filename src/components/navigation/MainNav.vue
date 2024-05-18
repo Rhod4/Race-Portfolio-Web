@@ -1,7 +1,9 @@
 <script setup>
-  import auth from "/src/functions/auth.js"
   import {useAuthStore} from "@/stores/authStore.js";
   import {ref} from "vue";
+  import {authValidation} from "@/functions/auth.js";
+
+  const auth = authValidation();
 
   const logout = async () => {
     await auth.postLogout();

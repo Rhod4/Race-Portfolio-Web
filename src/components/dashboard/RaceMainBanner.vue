@@ -40,12 +40,13 @@ const ShowModal = (race) => {
 </script>
 
 <template>
-  <div class="pb-10 bg-gray-400 flex flex-col min-h-[385px]">
-    <div class="bg-gray-400 pb-10 indicator w-full ">
+  <div class="pb-10 bg-gray-400 flex flex-col min-h-[350px]">
+    <div class="text-gray-300 z-20 pl-10 h-full font-bold text-xl" >UPCOMING RACES</div>
+    <div class="bg-gray-400 pb-2 indicator w-full ">
       <div class="indicator-item indicator-center w-full  bg-red">
         <div class="w-full py-8 badge rounded-none border-none split-red"></div>
       </div>
-      <div class="flex w-full justify-center">
+      <div class="flex w-full justify-center mt-2">
         <div class="card bg-base-100 shadow-xl image-full z-10 mx-5"
              :class="index === 1 ? '' : '!hidden lg:!grid'"
              v-for="(race, index) in races.slice(0,2)"

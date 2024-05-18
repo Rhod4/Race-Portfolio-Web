@@ -1,13 +1,14 @@
 <script setup>
-import auth from "@/functions/auth.js";
-import {computed} from "vue";
-import {email, helpers, required, sameAs} from "@vuelidate/validators";
+import {computed, reactive} from "vue";
+import {email, helpers, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
+import {authValidation} from "@/functions/auth.js";
 
-let login = {
+let login = reactive({
   email: "",
   password: "",
-}
+})
+
 const rules = computed(() => ({
   email: {
     required: helpers.withMessage("Email Required", required),
@@ -20,9 +21,13 @@ const rules = computed(() => ({
 
 const v$ = useVuelidate(rules, login)
 
+const auth = authValidation();
+
 const postLogin = async () => {
-  if (await v$.value.$validate())
+
+  if (await v$.value.$validate()){
     await auth.postLogin(login);
+  }
 }
 
 </script>
