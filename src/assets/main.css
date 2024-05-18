@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
-p {
-  color: blue;
+.input-error {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
+.error-msg {
+  color: theme("colors.red.700");
 }
 
 /*# sourceMappingURL=main.css.map */

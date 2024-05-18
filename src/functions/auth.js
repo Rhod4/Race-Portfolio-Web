@@ -4,6 +4,15 @@ import {useAuthStore} from "@/stores/authStore.js";
 
 export default class auth {
 
+   static postLogin = async (login) => {
+      await instance.post("http://localhost:8080/login", login, {params: {useCookies: true}, withCredentials: true}
+      ).then((response) =>{
+            this.getUserDetails();
+            console.log(response);
+         }
+      ).catch((error) => console.log(error))
+   }
+
    static postLogout = async () => {
       const authStore = useAuthStore();
       await instance.post("api/auth/logout", {},{withCredentials:true})
@@ -15,14 +24,18 @@ export default class auth {
 
    }
 
-   static postLogin = async (login) => {
-      await instance.post("http://localhost:8080/login", login, {params: {useCookies: true}, withCredentials: true}
-         ).then((response) =>{
-            this.getUserDetails();
-            console.log(response);
+   static postRegister = async (user) => {
+      const data ={
+         email : user.email,
+         password : user.password,
+      }
+      await instance.post("http://localhost:8080/register", data, {params: {useCookies: true}, withCredentials: true}
+      ).then((response) =>{
+         console.log(response)
          }
-         ).catch((error) => console.log(error))
+      ).catch((error) => console.log(error))
    }
+
    static getUserDetails = async () => {
       const authStore = useAuthStore();
 

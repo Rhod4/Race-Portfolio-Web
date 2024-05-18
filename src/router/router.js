@@ -1,5 +1,5 @@
 import Home from "@/views/Home.vue";
-import Login from "@/views/Login.vue";
+import Account from "@/views/Login.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import Races from "@/views/Races.vue";
 import TrackList from "@/views/tracks/TrackList.vue";
@@ -9,8 +9,14 @@ const routes = [{
    component: Home
    },
    {
-      path: "/Login",
-      component: Login
+      path: "/Account",
+      component: Account,
+      props: true
+   },
+   {
+      path: "/Account/:accountType",
+      component: Account,
+      props: true
    },
    {
       path: "/Races",
