@@ -13,7 +13,7 @@ let loading = ref(false);
 
 onMounted(() => {
   loading.value = true
-  axios.get("api/Track/AllTracks",).then(
+  axios.get("api/Track/Tracks",).then(
       (response) => {
         tracks.push(...response.data.success)
 
@@ -59,7 +59,7 @@ function trackFiler() {
 </script>
 
 <template>
-  <div>
+  <div class=" pt-4 px-10 pb-4">
     <div class="flex">
       <div class="grow">
         <SearchBar @search="handleSearch"></SearchBar>
@@ -127,6 +127,12 @@ function trackFiler() {
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="join flex justify-center my-10">
+      <button class="join-item btn">1</button>
+      <button class="join-item btn btn-active">2</button>
+      <button class="join-item btn">3</button>
+      <button class="join-item btn">4</button>
     </div>
   </div>
 </template>

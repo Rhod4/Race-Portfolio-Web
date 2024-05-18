@@ -1,13 +1,18 @@
 <script setup>
   import auth from "/src/functions/auth.js"
+  import {useAuthStore} from "@/stores/authStore.js";
+  import {ref} from "vue";
 
   const logout = async () => {
     await auth.postLogout();
   }
 
-  const test = async () => {
-    await auth.profileTest()
+  const getProfile = async () => {
+    await auth.getUserDetails()
   }
+  const authStore = useAuthStore();
+
+  const profleName = ref()
 
 </script>
 
@@ -37,8 +42,8 @@
           </div>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-          <li><a>Profile</a></li>
-          <li><a v-on:click="test">Settings</a></li>
+          <li><a v-on:click="getProfile">{{authStore.user.id ? authStore.user.firstname + " " + authStore.user.lastname : "Login"}}</a></li>
+          <li><a>Settings</a></li>
           <li><a v-on:click="logout">Logout</a></li>
         </ul>
       </div>
