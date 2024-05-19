@@ -9,27 +9,21 @@
     await auth.postLogout();
   }
 
-  const getProfile = async () => {
-    await auth.getUserDetails()
-  }
   const authStore = useAuthStore();
-
-  const profleName = ref()
-
 </script>
 
 <template>
-  <div class="navbar drop-shadow bg-gray-300 dark:bg-neutral pb-4">
+  <div class="navbar drop-shadow bg-gray-300 dark:bg-neutral pb-4 px-4">
     <div class="navbar-start">
-      <RouterLink to="/" class="text-2xl mx-2 dark:text-white">RP</RouterLink>
+      <RouterLink to="/" class="text-2xl mx-2 dark:text-white font-bold">RP</RouterLink>
     </div>
     <div class="navbar-center">
       <ul class="menu menu-horizontal px-1">
         <li>
-          <RouterLink to="/Races" class="text-2xl mx-2 dark:text-white">race</RouterLink>
+          <RouterLink to="/Races" class="text-2xl mx-2 dark:text-white font-semibold">Race</RouterLink>
         </li>
         <li>
-          <RouterLink to="/Tracks" class="text-2xl mx-2 dark:text-white">Tracks</RouterLink>
+          <RouterLink to="/Tracks" class="text-2xl mx-2 dark:text-white font-semibold">Tracks</RouterLink>
         </li>
       </ul>
     </div>
@@ -41,7 +35,7 @@
           </div>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-          <li><a v-on:click="getProfile">{{ authStore.user.firstname + " " + authStore.user.lastname}}</a></li>
+          <li><RouterLink to="/Profile">{{ authStore.user.firstname + " " + authStore.user.lastname}}</RouterLink></li>
           <li><a>Settings</a></li>
           <li><a v-on:click="logout">Logout</a></li>
         </ul>
@@ -49,9 +43,9 @@
       <div class="mr-4">
         <RouterLink
             to="/Account/login"
-            class="flex flex-col text-center"
+            class="flex flex-col text-center text-xl font-semibold"
             v-if="!authStore.user.id">
-          <div>login /</div>
+          <div>login or</div>
           <div>register</div>
         </RouterLink>
       </div>

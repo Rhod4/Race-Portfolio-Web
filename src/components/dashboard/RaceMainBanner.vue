@@ -41,10 +41,11 @@ const ShowModal = (race) => {
 
 <template>
   <div class="pb-10 bg-gray-400 flex flex-col min-h-[350px]">
-    <div class="text-gray-300 z-20 pl-10 h-full font-bold text-xl" >UPCOMING RACES</div>
     <div class="bg-gray-400 pb-2 indicator w-full ">
       <div class="indicator-item indicator-center w-full  bg-red">
-        <div class="w-full py-8 badge rounded-none border-none split-red"></div>
+        <div class="w-full py-8 badge rounded-none border-none split-red flex self-start -ml-1">
+          <div class="text-left w-full text-lg xl:text-2xl font-bold ml-2 pb-3 xl:pb-0">UPCOMING RACES</div>
+        </div>
       </div>
       <div class="flex w-full justify-center mt-2">
         <div class="card bg-base-100 shadow-xl image-full z-10 mx-5"
@@ -58,12 +59,14 @@ const ShowModal = (race) => {
                        style="--tw-blur: blur(2px)" alt="IRacing"/></figure>
           <div class="card-body">
             <h2 class="card-title">{{race.name}}</h2>
-            <span>{{race.id}}</span>
+            <span>Race Description</span>
             <div class="card-actions justify-end mt-auto">
-              <span class="">Find Out More!</span>
+              <div class="badge py-3 badge-ghost dark:badge-ghost">
+                <span class="mr-2">0</span>
+                <img src="/src/assets/images/misc/helmet.svg" class="max-w-[20px]"/>
+              </div>
             </div>
-
-            <button class="btn" v-on:click="ShowModal(race)">open modal</button>
+            <button class="btn" v-on:click="ShowModal(race)">Find Out More!</button>
 
           </div>
         </div>
@@ -84,6 +87,10 @@ const ShowModal = (race) => {
 
 
 .split-red {
-  background: linear-gradient(125deg ,theme('colors.red.800') 50.8%, transparent 0%);
+  background: linear-gradient(125deg ,theme('colors.red.800') 70%, transparent 0%);
+
+  @media (min-width: 450px)  {
+    background: linear-gradient(125deg ,theme('colors.red.800') 50.8%, transparent 0%);
+  }
 }
 </style>

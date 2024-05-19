@@ -14,7 +14,6 @@ export const useAuthStore  =  defineStore("userAuth", {
          this.user.id = setUser.id
          this.user.firstname = setUser.firstname
          this.user.lastname = setUser.lastname
-         console.log(setUser)
       }
    }
 })

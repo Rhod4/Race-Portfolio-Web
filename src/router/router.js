@@ -3,6 +3,7 @@ import Account from "@/views/Login.vue";
 import {createRouter, createWebHistory} from "vue-router";
 import Races from "@/views/Races.vue";
 import TrackList from "@/views/tracks/TrackList.vue";
+import Profile from "@/views/Profile.vue";
 
 const routes = [{
    path: '/',
@@ -25,6 +26,10 @@ const routes = [{
    {
       path: "/Tracks",
       component: TrackList
+   },
+   {
+      path: "/Profile",
+      component: Profile
    },
 ]
 
