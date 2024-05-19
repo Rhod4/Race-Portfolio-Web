@@ -1,32 +1,26 @@
-
 <script setup>
 
 import axios from "axios";
 import {onMounted, reactive, ref} from "vue";
 import RaceModal from "@/components/dashboard/RaceModal.vue";
+import {raceValidations} from "@/functions/races.js";
+
+const raceVal = raceValidations()
 const races = reactive([]);
 
 const loading = ref(true);
 
 const getRaces = async () => {
-
-  axios.get("api/Race/Races")
-      .then(response => {
-        races.push(...response.data.success.map(item => ({ ...item })), ...response.data.success.map(item => ({ ...item })))
-
-      })
-      .catch(error => {
-        console.error("There was a problem with the Axios request:", error);
-      }).finally(() => {
-       setTimeout(() => loading.value = false, 2000)
-
-        console.log(races.find((value, index) => index === 1).name = "race 2");
-      }
-  );
+  return await raceVal.getDashboardRaces();
 }
 
-onMounted(()=>{
-  getRaces()});
+onMounted(async () => {
+  const racesFromApi = await getRaces().finally(() =>
+      setTimeout(() => loading.value = false, 2000)
+  )
+
+  races.push(...racesFromApi)
+});
 
 const modalData = reactive({})
 
@@ -48,26 +42,28 @@ const ShowModal = (race) => {
         </div>
       </div>
       <div class="flex w-full justify-center mt-2">
-        <div class="card bg-base-100 shadow-xl image-full z-10 mx-5"
-             :class="index === 1 ? '' : '!hidden lg:!grid'"
-             v-for="(race, index) in races.slice(0,2)"
-             type="button"
-             v-if="loading === false"
+        <div
+            v-for="(race, index) in races"
+            :class="index === 1 ? '' : '!hidden lg:!grid'"
+            v-if="loading === false"
         >
-          <figure><img :src="'/src/assets/images/games/' + race.id + '.png'"
-                       class="blur"
-                       style="--tw-blur: blur(2px)" alt="IRacing"/></figure>
-          <div class="card-body">
-            <h2 class="card-title">{{race.name}}</h2>
-            <span>Race Description</span>
-            <div class="card-actions justify-end mt-auto">
-              <div class="badge py-3 badge-ghost dark:badge-ghost">
-                <span class="mr-2">0</span>
-                <img src="/src/assets/images/misc/helmet.svg" class="max-w-[20px]"/>
+          <div class="card bg-base-100 shadow-xl image-full z-10 mx-5"
+               type="button"
+          >
+            <figure><img :src="'/src/assets/images/games/' + race.id + '.png'"
+                         class="blur"
+                         style="--tw-blur: blur(2px)" alt="IRacing"/></figure>
+            <div class="card-body">
+              <h2 class="card-title">{{ race.name }}</h2>
+              <span>Race Description</span>
+              <div class="card-actions justify-end mt-auto">
+                <div class="badge py-3 badge-ghost dark:badge-ghost">
+                  <span class="mr-2">0</span>
+                  <img src="/src/assets/images/misc/helmet.svg" class="max-w-[20px]"/>
+                </div>
               </div>
+              <button class="btn" v-on:click="ShowModal(race)">Find Out More!</button>
             </div>
-            <button class="btn" v-on:click="ShowModal(race)">Find Out More!</button>
-
           </div>
         </div>
       </div>
@@ -76,7 +72,7 @@ const ShowModal = (race) => {
         class="flex items-center h-full my-auto justify-center"
         v-if="loading === true">
       <div>
-      <span class="loading loading-dots loading-lg text-neutral"></span></div>
+        <span class="loading loading-dots loading-lg text-neutral"></span></div>
     </div>
   </div>
 
@@ -87,10 +83,10 @@ const ShowModal = (race) => {
 
 
 .split-red {
-  background: linear-gradient(125deg ,theme('colors.red.800') 70%, transparent 0%);
+  background: linear-gradient(125deg, theme('colors.red.800') 70%, transparent 0%);
 
-  @media (min-width: 450px)  {
-    background: linear-gradient(125deg ,theme('colors.red.800') 50.8%, transparent 0%);
+  @media (min-width: 450px) {
+    background: linear-gradient(125deg, theme('colors.red.800') 50.8%, transparent 0%);
   }
 }
 </style>

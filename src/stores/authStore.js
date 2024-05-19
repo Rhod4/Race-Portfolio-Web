@@ -4,9 +4,9 @@ export const useAuthStore  =  defineStore("userAuth", {
    state: () => (
       {
          user: {
-            id: "",
-            firstname: "",
-            lastname: "",
+            id: undefined,
+            firstname: undefined,
+            lastname: undefined,
          }
    }),
    actions: {

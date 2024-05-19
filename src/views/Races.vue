@@ -1,75 +1,74 @@
 <script setup>
 
 import axios from "axios";
-import {onMounted} from "vue";
+import {onMounted, reactive, ref} from "vue";
+import {raceValidations} from "@/functions/races.js";
+import SearchBar from "@/components/navigation/SearchBar.vue";
+import {useAuthStore} from "@/stores/authStore.js";
+import RaceModal from "@/components/dashboard/RaceModal.vue";
 
-let races = [];
+const raceVal = raceValidations()
 
-function getRaces() {
-  axios.get("api/Race/Races")
-      .then(response => {
-        // Process the response data here
-        races = response.data;
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error("There was a problem with the Axios request:", error);
-      });
+const authStore = useAuthStore()
+
+const data = reactive({races: []});
+const modalData = reactive({})
+const RaceModalRef = ref("RaceModalRef")
+
+const searchFilter = ref("")
+
+const handleSearch = (val) => {
+  if(val)
+    searchFilter.value = val;
 }
 
-onMounted(()=>{
-  console.log("t");
-  getRaces()});
+onMounted(async () => {
+  data.races = await raceVal.getRaces()
+  console.log(data.races)
+})
 
+const ShowModal = (race) => {
+  modalData.data = race
+  RaceModalRef.value.ShowModal();
+}
 
 </script>
 
 <template>
-  <div>
-    <div v-for="race in races">
-      <p>{{race.name}}</p>
+
+  <div class="px-10 pt-10">
+    <div class="overflow-x-auto p-2">
+      <div class="mb-10">
+        <SearchBar @search="handleSearch"></SearchBar>
+      </div>
+      <div class="grid grid-cols-3 gap-2">
+      <div
+          v-for="race in data.races.filter(val => searchFilter? val.game.name.includes(searchFilter) : val )">
+      <div class="card bg-base-100 shadow-xl image-full z-10 mx-5"
+           type="button"
+      >
+        <figure><img :src="'/src/assets/images/games/' + race.id + '.png'"
+                     class="blur"
+                     style="--tw-blur: blur(2px)" alt="IRacing"/></figure>
+        <div class="card-body">
+          <h2 class="card-title">{{ race.name }}</h2>
+          <span>Race Description</span>
+          <div class="card-actions justify-end mt-auto">
+            <div class="badge py-3 badge-ghost dark:badge-ghost">
+              <span class="mr-2">0</span>
+              <img src="/src/assets/images/misc/helmet.svg" class="max-w-[20px]"/>
+            </div>
+          </div>
+          <button class="btn" v-on:click="ShowModal(race)" v-if="!authStore.user.id">Find Out More!</button>
+          <RouterLink class="btn" :to="'/RaceDetails/'+race.id" v-if="authStore.user.id">View Race</RouterLink>
+        </div>
+      </div>
+      </div>
+      </div>
     </div>
   </div>
 
-  <div><p class="underline">blue</p></div>
-  <button class="btn btn-primary">Click me!</button>
-  <button class="btn bg-red-800	">Click me2!</button>
-
-
-  <div class="overflow-x-auto">
-    <table class="table table-zebra">
-      <!-- head -->
-      <thead>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-      </tr>
-      </thead>
-      <tbody>
-      <!-- row 1 -->
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+  <race-modal ref="RaceModalRef" :raceProp="modalData.data" :loggedIn="true"></race-modal>
 </template>
 
 <style scoped>

@@ -1,9 +1,17 @@
 <script setup>
   import {reactive} from "vue";
+  import {useAuthStore} from "@/stores/authStore.js";
+  const authStore = useAuthStore()
 
   const props = defineProps({
     raceProp : {},
+    loggedIn:  {
+      type: Boolean,
+      required: false
+    }
   })
+
+  const canJoinRace = props.loggedIn && authStore.user.id !== undefined
 
   function ShowModal(){
     document.getElementById('race-modal').showModal()
@@ -33,10 +41,10 @@
           0: drivers in race
         </div>
       </div>
+      <RouterLink v-if="canJoinRace">
+        Join Race
+      </RouterLink>
     </div>
-    <form method="dialog" class="modal-backdrop">
-      <button>close</button>
-    </form>
   </dialog>
 </template>
 

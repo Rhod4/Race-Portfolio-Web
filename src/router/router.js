@@ -4,6 +4,7 @@ import {createRouter, createWebHistory} from "vue-router";
 import Races from "@/views/Races.vue";
 import TrackList from "@/views/tracks/TrackList.vue";
 import Profile from "@/views/Profile.vue";
+import RaceDetails from "@/views/RaceDetails.vue";
 
 const routes = [{
    path: '/',
@@ -31,6 +32,10 @@ const routes = [{
       path: "/Profile",
       component: Profile
    },
+   {
+      path: "/RaceDetails/:id",
+      component: RaceDetails
+   }
 ]
 
 const router = createRouter({

@@ -75,7 +75,7 @@ function trackFiler() {
             </select>
           </div>
           <div class="ml-2">
-            <label class="btn btn-circle swap swap-rotate">
+            <label class="btn btn-circle swap swap-rotate static z-0">
               <input type="checkbox" v-on:click="format = !format"/>
               <svg class="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                    viewBox="0 0 512 512">
