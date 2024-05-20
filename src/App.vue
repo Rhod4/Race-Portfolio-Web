@@ -13,9 +13,11 @@ import {authValidation} from "@/functions/auth.js";
   <header>
   </header>
 
-  <main class="">
+  <main class="bg-gray-50 dark:bg-base-100 h-full">
     <main-nav></main-nav>
     <RouterView></RouterView>
+    <footer class="footer">
+    </footer>
   </main>
 </template>
 

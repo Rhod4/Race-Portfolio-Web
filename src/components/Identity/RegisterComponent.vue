@@ -9,7 +9,7 @@ const auth = authValidation();
 let user = reactive({
   email: "",
   password: "",
-  confirmPassword: {}
+  confirmPassword: ""
 })
 const rules = computed(() => ({
   email: {
@@ -20,15 +20,16 @@ const rules = computed(() => ({
     required: helpers.withMessage("Password Required", required)
   },
   confirmPassword: {
-    required: helpers.withMessage("Password Required", required),
-    sameAsPassword: helpers.withMessage("", sameAs('user.password' ))
+    //todo: something wrong
+    // required: helpers.withMessage("Password Required", required),
+    // sameAsPassword: helpers.withMessage("", sameAs('user.password' ))
   }
 }))
 
 const v$ = useVuelidate(rules, user)
 
 const postRegister = async () => {
-
+console.log("t")
   if (await v$.value.$validate())
     await auth.postRegister(user);
 }
@@ -61,8 +62,8 @@ const postRegister = async () => {
             <path fill-rule="evenodd"
                   d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
                   clip-rule="evenodd"/>
-            <input type="password" class="grow" placeholder="Password" v-model="user.password"/>
           </svg>
+          <input type="password" class="grow" placeholder="Password" v-model="user.password"/>
         </label>
         <div class="input-error" v-for="error of v$.password.$errors" :key="error.$uid">
           <div class="error-msg">

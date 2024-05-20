@@ -52,30 +52,44 @@ export const raceValidations = () => {
          });
    }
    const removedFromRace = async (raceId) => {
-      return await axios.post("api/Race/RemoveParticipateInRace/"+raceId, null , {
+      return await axios.post(`api/Race/RemoveParticipateInRace/${raceId}`, null , {
          withCredentials: true,
       })
          .then(response => {
-            console.log(response.data.race)
-            return response.data.race;
-         })
-         .catch(error => {
-            console.error("There was a problem with the Axios request:", error);
-         });
-   }
-   const isUserInRace = async (raceId) => {
-      return await axios.post("api/Race/UserParticipatingInRace/"+raceId, raceId , {
-         withCredentials: true,
-      })
-         .then(response => {
-            console.log(response.data.race)
-            return response.data.race;
+            console.log(response)
+            return response.data;
          })
          .catch(error => {
             console.error("There was a problem with the Axios request:", error);
          });
    }
 
+   const checkIfRacing = async (raceId) => {
+      return await axios.post(`api/Race/AlreadyRacing/${raceId}`, null, {
+         withCredentials: true,
+      })
+         .then(response => {
+            return response.data.isParticipating;
+         })
+         .catch(error => {
+            console.error("There was a problem with the Axios request:", error);
+            return false
+         });
+   }
 
-   return {getRaces, getRace, getDashboardRaces, addToRace}
+   const getParticipants = async (raceId) => {
+      return await axios.get(`api/Race/GetParticipants/${raceId}`, null, {
+         withCredentials: true,
+      })
+         .then(response => {
+            console.log(response.data)
+            return response.data.participants
+         })
+         .catch(error => {
+            console.error("There was a problem with the Axios request:", error);
+            return false
+         });
+   }
+
+   return {getRaces, getRace, getDashboardRaces, addToRace, removedFromRace, checkIfRacing, getParticipants}
 }

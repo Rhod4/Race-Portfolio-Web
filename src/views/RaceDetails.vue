@@ -4,7 +4,7 @@ import {raceValidations} from "@/functions/races.js";
 
 const raceValidate = raceValidations()
 import {useRoute} from 'vue-router'
-import {onMounted, reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
 
 const race = reactive({})
 const route = useRoute()
@@ -13,32 +13,61 @@ const getRaceDetails = async () => {
   return await raceValidate.getRace(route.params.id);
 }
 
+const isParticipating = ref(false)
+
 const addToRace = async () => {
-  await raceValidate.addToRace(route.params.id, 1)
+  console.log("add")
+  await raceValidate.addToRace(route.params.id, 1).then(() =>
+      isParticipating.value = true)
+}
+
+const RemoveFromRace = async () => {
+  console.log("remove")
+  await raceValidate.removedFromRace(route.params.id).then(() =>
+      isParticipating.value = false)
+}
+
+const getParticipants = async () => {
+  return await raceValidate.getParticipants(route.params.id).then((response) =>
+      response
+  )
 }
 
 onMounted(async () => {
       race.details = await getRaceDetails()
+      isParticipating.value = await raceValidate.checkIfRacing(route.params.id);
+      race.participants = await getParticipants()
+      console.log(race.participants)
     }
 )
 
 </script>
 
 <template>
-  <div>
-    <button v-on:click="addToRace()">addToRace</button>
-    <div class="mx-10 flex flex-col" v-if="race.details != null">
-      <div class="mt-5 pb-2 flex justify-between border-b">
-        <div class="text-3xl">
-          {{ race.details.name }}
+  <div class="">
+    <div class="mx-10 flex flex-col " v-if="race.details != null">
+      <div class="mt-5 pb-2 grid grid-cols-12 border-b">
+        <div class="col-span-10 flex flex-col">
+          <div class="text-3xl">
+            {{ race.details.name }}
+          </div>
+          <div class="my-auto flex flex-col">
+            <div>
+              {{ new Date(race.details.raceDate).toLocaleDateString() }}
+            </div>
+            <div>
+              {{ new Date(race.details.raceDate).toLocaleTimeString() }}
+            </div>
         </div>
-        <div class="my-auto flex flex-col">
-          <div>
-            {{ new Date(race.details.raceDate).toLocaleDateString() }}
-          </div>
-          <div>
-            {{ new Date(race.details.raceDate).toLocaleTimeString() }}
-          </div>
+        </div>
+        <div class="flex ml-auto my-auto col-span-2">
+          <button
+              v-on:click="isParticipating ? RemoveFromRace() : addToRace()"
+              class="btn"
+              :class="isParticipating ? 'btn-error' : 'btn-success'"
+          >
+            {{isParticipating ? 'Remove From Race' : 'Join Race'}}
+          </button>
         </div>
       </div>
       <div class="flex flex-col shadow rounded-b-xl mb-2">
@@ -69,7 +98,7 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-      <div class="p-4 shadow mt-4 rounded-2xl">
+      <div class="p-4 shadow mt-4 rounded-2xl bg-white dark:bg-gray-300">
         <table class="table">
           <thead>
           <tr>
@@ -91,7 +120,7 @@ onMounted(async () => {
           </tr>
           </thead>
           <tbody>
-          <tr v-for="raceParticipants in race.details.raceParticipants">
+          <tr v-for="raceParticipants in race.participants">
             <td>
               {{raceParticipants.userRaceNumber}}
             </td>
@@ -99,7 +128,7 @@ onMounted(async () => {
               {{raceParticipants.profile.firstname}} {{raceParticipants.profile.lastname}}
             </td>
             <td>
-              Ferrari 296 GT3
+              {{raceParticipants.car.name}}
             </td>
             <td>
               13
