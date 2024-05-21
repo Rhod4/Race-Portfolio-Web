@@ -16,8 +16,8 @@ const getRaceDetails = async () => {
 const isParticipating = ref(false)
 
 const addToRace = async () => {
-  console.log("add")
-  await raceValidate.addToRace(route.params.id, 1).then(() =>
+  const carId = "cbfc5a36-9e2d-4b03-9ab8-928de7113293"
+  await raceValidate.addToRace(route.params.id, 1,carId).then(() =>
       isParticipating.value = true)
 }
 
@@ -70,7 +70,7 @@ onMounted(async () => {
           </button>
         </div>
       </div>
-      <div class="flex flex-col shadow rounded-b-xl mb-2">
+      <div class="flex flex-col shadow-xl rounded-b-xl mb-2">
         <div class="my-5 ">
           <div class="badge badge-warning mx-1">
             {Rating type}
@@ -98,24 +98,24 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-      <div class="p-4 shadow mt-4 rounded-2xl bg-white dark:bg-gray-300">
+      <div class="p-4 shadow-xl mt-4 rounded-2xl bg-white dark:bg-gray-600">
         <table class="table">
           <thead>
           <tr>
             <th>
-              Number
+             <span class="badge">Number</span>
             </th>
             <th>
-              Driver
+              <span class="badge">Driver</span>
             </th>
             <th>
-              Car
+              <span class="badge">Car</span>
             </th>
             <th>
-              Session Laps
+              <span class="badge">Session Laps</span>
             </th>
             <th>
-              Session Best Time
+              <span class="badge">Session Best Time</span>
             </th>
           </tr>
           </thead>

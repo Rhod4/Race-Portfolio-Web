@@ -35,12 +35,13 @@ export const raceValidations = () => {
          });
    }
 
-   const addToRace = async (raceId, raceNumber) => {
+   const addToRace = async (raceId, raceNumber, carId) => {
       return await axios.post("api/Race/ParticipateInRace", null , {
          withCredentials: true,
          params: {
             raceId ,
-            raceNumber
+            raceNumber,
+            carId
          }
       })
          .then(response => {

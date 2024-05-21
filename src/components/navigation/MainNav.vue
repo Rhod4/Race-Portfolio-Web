@@ -13,7 +13,7 @@
 </script>
 
 <template>
-  <div class="navbar drop-shadow bg-gray-300 dark:bg-neutral pb-4 px-4">
+  <div class="navbar drop-shadow bg-gray-100 dark:bg-neutral pb-4 px-4">
     <div class="navbar-start">
       <RouterLink to="/" class="text-2xl mx-2 dark:text-white font-bold">RP</RouterLink>
     </div>

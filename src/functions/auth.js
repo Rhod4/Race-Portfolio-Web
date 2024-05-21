@@ -8,7 +8,7 @@ export const authValidation = () => {
 
    const postLogin = async (login) => {
 
-      await instance.post("http://localhost:8080/login", login, {params: {useCookies: true}, withCredentials: true}
+      return await instance.post("http://localhost:8080/login", login, {params: {useCookies: true}, withCredentials: true}
       ).then(() =>{
             getUserDetails();
             Swal.mixin({
@@ -19,7 +19,7 @@ export const authValidation = () => {
             })
             router.push('/')
          }
-      ).catch((error) => console.log(error))
+      ).catch((error) => error)
    }
 
    const postLogout = async () => {

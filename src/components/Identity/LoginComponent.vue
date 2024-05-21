@@ -1,5 +1,5 @@
 <script setup>
-import {computed, reactive} from "vue";
+import {computed, reactive, ref} from "vue";
 import {email, helpers, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import {authValidation} from "@/functions/auth.js";
@@ -23,10 +23,15 @@ const v$ = useVuelidate(rules, login)
 
 const auth = authValidation();
 
+const error = ref(false);
+
 const postLogin = async () => {
 
   if (await v$.value.$validate()){
-    await auth.postLogin(login);
+    const data = await auth.postLogin(login)
+    console.log(data.response)
+    if(data.response.data.status === 401)
+      error.value = true
   }
 }
 
@@ -35,6 +40,9 @@ const postLogin = async () => {
 <template>
   <div>
     <h2 class="mb-5">Login</h2>
+    <div v-if="error === true" class="w-full flex">
+      <span class="text-red-600 text-center w-full">Incorrect Details Entered</span>
+    </div>
     <form v-on:submit.prevent="postLogin()">
       <label class="input input-bordered flex items-center gap-2 mt-2">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70">
