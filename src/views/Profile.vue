@@ -2,6 +2,7 @@
 
 import {authValidation} from "@/functions/auth.js";
 import {onMounted, reactive} from "vue";
+import BasicDetailsInputComponent from "@/components/profile/BasicDetailsInputComponent.vue";
 
 const auth = authValidation();
 
@@ -30,16 +31,7 @@ onMounted(() => {
 <template>
   <div class="mt-10 grid grid-cols-12 gap-10 m-5">
     <div class="col-span-8">
-    <div class="border rounded-2xl p-10 w-full">
-      <div class="w-full grid grid-cols-2 w-3/4">
-          <span>First Name: </span>
-          <span>{{user.firstname}}</span>
-          <span>Last Name: </span>
-          <span>{{user.lastname}}</span>
-          <span>Email: </span>
-          <span> {{user.email}}</span>
-      </div>
-    </div>
+      <basic-details-input-component :user="user"></basic-details-input-component>
     </div>
     <div class="flex  col-span-4 w-full">
       <div class="border flex-col rounded-xl w-full flex p-2">

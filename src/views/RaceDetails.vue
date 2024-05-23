@@ -17,12 +17,14 @@ const isParticipating = ref(false)
 
 const addToRace = async () => {
   const carId = "cbfc5a36-9e2d-4b03-9ab8-928de7113293"
-  await raceValidate.addToRace(route.params.id, 1,carId).then(() =>
-      isParticipating.value = true)
+  const isAdded = await raceValidate.addToRace(route.params.id, 1, carId)
+
+  if (isAdded === true) {
+    isParticipating.value = true
+  }
 }
 
 const RemoveFromRace = async () => {
-  console.log("remove")
   await raceValidate.removedFromRace(route.params.id).then(() =>
       isParticipating.value = false)
 }
@@ -37,7 +39,6 @@ onMounted(async () => {
       race.details = await getRaceDetails()
       isParticipating.value = await raceValidate.checkIfRacing(route.params.id);
       race.participants = await getParticipants()
-      console.log(race.participants)
     }
 )
 
@@ -58,7 +59,7 @@ onMounted(async () => {
             <div>
               {{ new Date(race.details.raceDate).toLocaleTimeString() }}
             </div>
-        </div>
+          </div>
         </div>
         <div class="flex ml-auto my-auto col-span-2">
           <button
@@ -66,7 +67,7 @@ onMounted(async () => {
               class="btn"
               :class="isParticipating ? 'btn-error' : 'btn-success'"
           >
-            {{isParticipating ? 'Remove From Race' : 'Join Race'}}
+            {{ isParticipating ? 'Remove From Race' : 'Join Race' }}
           </button>
         </div>
       </div>
@@ -103,7 +104,7 @@ onMounted(async () => {
           <thead>
           <tr>
             <th>
-             <span class="badge">Number</span>
+              <span class="badge">Number</span>
             </th>
             <th>
               <span class="badge">Driver</span>
@@ -122,13 +123,13 @@ onMounted(async () => {
           <tbody>
           <tr v-for="raceParticipants in race.participants">
             <td>
-              {{raceParticipants.userRaceNumber}}
+              {{ raceParticipants.userRaceNumber }}
             </td>
             <td>
-              {{raceParticipants.profile.firstname}} {{raceParticipants.profile.lastname}}
+              {{ raceParticipants.profile.firstname }} {{ raceParticipants.profile.lastname }}
             </td>
             <td>
-              {{raceParticipants.car.name}}
+              {{ raceParticipants.car.name }}
             </td>
             <td>
               13

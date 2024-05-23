@@ -1,13 +1,22 @@
 import axios from "axios";
+import {useAuthStore} from "@/stores/authStore.js";
+import Swal from "sweetalert2";
+import {defineComponent} from "vue";
+import BasicDetailsInputComponent from "@/components/profile/BasicDetailsInputComponent.vue";
+import router from "@/router/router.js";
+
+export default defineComponent({
+   components: {BasicDetailsInputComponent}
+})
 
 
 export const raceValidations = () => {
+   const authstore = useAuthStore()
 
    const getRaces = async () => {
       return await axios.get("api/Race/Races/", { withCredentials: true})
          .then(response => {
-            console.log(response.data.success)
-            return response.data.success;
+            return response.data;
          })
          .catch(error => {
             console.error("There was a problem with the Axios request:", error);
@@ -16,8 +25,7 @@ export const raceValidations = () => {
    const getDashboardRaces = async () => {
       return await axios.get("api/Race/Races/" + 2, { withCredentials: true})
          .then(response => {
-            console.log(response.data.success)
-            return response.data.success;
+            return response.data;
          })
          .catch(error => {
             console.error("There was a problem with the Axios request:", error);
@@ -27,8 +35,7 @@ export const raceValidations = () => {
    const getRace = async (id) => {
       return await axios.get("api/Race/Race/"+id, { withCredentials: true})
          .then(response => {
-            console.log(response.data.race)
-            return response.data.race;
+            return response.data;
          })
          .catch(error => {
             console.error("There was a problem with the Axios request:", error);
@@ -36,6 +43,9 @@ export const raceValidations = () => {
    }
 
    const addToRace = async (raceId, raceNumber, carId) => {
+      if(authstore.user.firstname === "" || authstore.user.lastname === ""){
+         return await basicDetailsMissing()
+      }
       return await axios.post("api/Race/ParticipateInRace", null , {
          withCredentials: true,
          params: {
@@ -45,8 +55,7 @@ export const raceValidations = () => {
          }
       })
          .then(response => {
-            console.log(response.data.race)
-            return response.data.race;
+            return true;
          })
          .catch(error => {
             console.error("There was a problem with the Axios request:", error);
@@ -57,7 +66,6 @@ export const raceValidations = () => {
          withCredentials: true,
       })
          .then(response => {
-            console.log(response)
             return response.data;
          })
          .catch(error => {
@@ -83,7 +91,6 @@ export const raceValidations = () => {
          withCredentials: true,
       })
          .then(response => {
-            console.log(response.data)
             return response.data.participants
          })
          .catch(error => {
@@ -92,5 +99,18 @@ export const raceValidations = () => {
          });
    }
 
+   const basicDetailsMissing = async () => {
+      Swal.fire({
+         icon: "warning",
+         text: "Please fill in your basic details before racing",
+         showCancelButton: true,
+         customClass: {popup: "dark:bg-base-100 dark:text-white", }
+      }).then((response) => {
+            if(response.isConfirmed){
+               router.push("/Profile")
+            }
+         }
+      )
+   }
    return {getRaces, getRace, getDashboardRaces, addToRace, removedFromRace, checkIfRacing, getParticipants}
 }
