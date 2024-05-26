@@ -86,5 +86,12 @@ export const authValidation = () => {
       })
    }
 
-   return {postLogin, postLogout, postRegister, getUserDetails, postProfileData}
+   const checkLogin = async () => {
+      const authStore = useAuthStore();
+      await getUserDetails()
+
+      await authStore.checkLogin()
+   }
+
+   return {postLogin, postLogout, postRegister, getUserDetails, postProfileData, checkLogin}
 }

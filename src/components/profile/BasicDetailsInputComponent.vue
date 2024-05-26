@@ -1,7 +1,7 @@
 <script setup>
 
 import {computed, onMounted, reactive, ref} from "vue";
-import {email, helpers, required} from "@vuelidate/validators";
+import {helpers, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import {useAuthStore} from "@/stores/authStore.js";
 import {authValidation} from "@/functions/auth.js";
@@ -15,14 +15,10 @@ const userDetails = reactive({
   email: ""
 })
 
-await authStore.checkLogin()
-
-defineProps({
-  loadingProfileDetails: Boolean
-})
+const loadingData = ref(true)
 
 const loadUser = async () => {
-  const userData = await auth.getUserDetails()
+  await auth.checkLogin().finally(()=> loadingData.value = false)
   userDetails.firstname = authStore.user.firstname
   userDetails.lastname = authStore.user.lastname
   userDetails.email = authStore.user.email
@@ -38,7 +34,8 @@ const rules = computed(() => ({
 }))
 
 onMounted(() => {
-  loadUser();
+  loadUser().then(() =>
+  {});
 })
 
 const v$ = useVuelidate(rules, userDetails)
@@ -59,10 +56,10 @@ const AllowUpdateInfo = async () => {
 </script>
 
 <template>
-  <div class="rounded-2xl h-full relative flex w-full flex-col dark:bg-gray-700">
-    <div class="z-20 h-full w-full flex absolute bg-gray-50 rounded-2xl opacity-20 justify-center"
-    v-show="loadingProfileDetails">
-      <span class="loading loading-dots "></span>
+  <div class="rounded-2xl h-full relative flex w-full flex-col dark:bg-gray-700 shadow-xl">
+    <div class="h-full w-full flex absolute bg-gray-50 rounded-2xl opacity-20 justify-center"
+    v-show="loadingData">
+      <span class="loading loading-dots"></span>
     </div>
     <div class="p-10 w-full flex-col">
       <div class="w-full ">

@@ -27,6 +27,9 @@
     </div>
     <div class="navbar-center">
       <ul class="menu menu-horizontal px-1">
+        <li v-show="authStore.user.id !== undefined">
+          <RouterLink to="/Dashboard" class="text-2xl mx-2 dark:text-white font-semibold">Dashboard</RouterLink>
+        </li>
         <li>
           <RouterLink to="/Races" class="text-2xl mx-2 dark:text-white font-semibold">Race</RouterLink>
         </li>
@@ -42,7 +45,7 @@
             <img alt="Tailwind CSS Navbar component" src="/public/favicon.ico" />
           </div>
         </div>
-        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52">
           <li><RouterLink to="/Profile">{{ profileName }}</RouterLink></li>
           <li><a>Settings</a></li>
           <li><a v-on:click="logout">Logout</a></li>

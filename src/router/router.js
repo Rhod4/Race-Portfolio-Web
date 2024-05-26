@@ -5,6 +5,7 @@ import Races from "@/views/Races.vue";
 import TrackList from "@/views/tracks/TrackList.vue";
 import Profile from "@/views/Profile.vue";
 import RaceDetails from "@/views/RaceDetails.vue";
+import Dashboard from "@/views/dashboards/Dashboard.vue";
 
 const routes = [{
    path: '/',
@@ -35,6 +36,10 @@ const routes = [{
    {
       path: "/RaceDetails/:id",
       component: RaceDetails
+   },
+   {
+      path: "/Dashboard",
+      component: Dashboard
    }
 ]
 

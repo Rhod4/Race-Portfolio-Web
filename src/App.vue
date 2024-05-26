@@ -21,7 +21,7 @@ import {useAuthStore} from "@/stores/authStore.js";
 
   <main class="bg-gray-50 dark:bg-base-100 h-full">
     <main-nav></main-nav>
-    <RouterView :loading-profile-details="loadingProfileDetails"></RouterView>
+    <RouterView></RouterView>
     <footer class="footer">
     </footer>
   </main>

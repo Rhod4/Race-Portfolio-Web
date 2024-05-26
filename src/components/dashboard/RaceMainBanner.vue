@@ -93,7 +93,7 @@ const ShowModal = (race) => {
 }
 .banner-image {
   background: url("/src/assets/images/misc/BannerImage.jpg") no-repeat center;
-  filter: blur(10px) brightness(.7);
+  filter: blur(4px) brightness(.7);
   clip-path: inset(0);
 
 }
