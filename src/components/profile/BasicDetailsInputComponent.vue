@@ -9,14 +9,24 @@ import {authValidation} from "@/functions/auth.js";
 const authStore = useAuthStore();
 const auth = authValidation();
 
-const props = defineProps({
-  user: {}
-})
-
-let userDetails = reactive({
+const userDetails = reactive({
   firstname: "",
   lastname: "",
+  email: ""
 })
+
+await authStore.checkLogin()
+
+defineProps({
+  loadingProfileDetails: Boolean
+})
+
+const loadUser = async () => {
+  const userData = await auth.getUserDetails()
+  userDetails.firstname = authStore.user.firstname
+  userDetails.lastname = authStore.user.lastname
+  userDetails.email = authStore.user.email
+}
 
 const rules = computed(() => ({
   firstname: {
@@ -28,47 +38,70 @@ const rules = computed(() => ({
 }))
 
 onMounted(() => {
-  userDetails.firstname = props.user.firstname
-  userDetails.lastname = props.user.lastname
+  loadUser();
 })
 
 const v$ = useVuelidate(rules, userDetails)
 
-const postDetails = async () => {
+const EditDetails = async () => {
 
   if (await v$.value.$validate()) {
-    const data = await auth.postProfileData(userDetails)
+    await auth.postProfileData(userDetails)
   }
 }
-const updaing = ref(false);
-const UpdateInfo = async () => {
-  updaing.value = !updaing.value;
+const updating = ref(false);
+
+const AllowUpdateInfo = async () => {
+  updating.value = !updating.value;
 }
+
 
 </script>
 
 <template>
-  <div class="border rounded-2xl">
+  <div class="rounded-2xl h-full relative flex w-full flex-col dark:bg-gray-700">
+    <div class="z-20 h-full w-full flex absolute bg-gray-50 rounded-2xl opacity-20 justify-center"
+    v-show="loadingProfileDetails">
+      <span class="loading loading-dots "></span>
+    </div>
     <div class="p-10 w-full flex-col">
-      <div class="w-full grid grid-cols-2 w-3/4">
-        <span class="my-auto">First Name: </span>
-        <input
-            class="input input-sm my-2"
-            :class="updaing ? ' input-bordered' : ''"
-            :readonly="!updaing"
-            v-model="userDetails.lastname">
-        <span class="my-auto">Last Name: </span>
-        <input
-            class="input input-sm my-2"
-            :class="updaing ? ' input-bordered' : ''"
-            :readonly="!updaing"
-            v-model="userDetails.firstname">
-        <span class="my-auto">Email: </span>
-        <span class="my-auto"> {{ user.email }}</span>
+      <div class="w-full ">
+        <div class="grid grid-cols-2 border-b dark:border-gray-500 py-2">
+          <span class="my-auto">First Name: </span>
+          <input
+              class="input input-bordered input-warning shadow-xl dark:bg-gray-700"
+              v-model="userDetails.firstname"
+              placeholder="Please Enter"
+              v-show="updating">
+          <span
+              class="input flex items-center dark:bg-gray-700"
+              v-show="!updating">
+            {{ userDetails.firstname }}
+          </span>
+        </div>
+        <div class="grid grid-cols-2 border-b dark:border-gray-500 py-2">
+          <span class="my-auto">Last Name: </span>
+          <input
+              class="input input-bordered input-warning dark:bg-gray-700"
+              v-model="userDetails.lastname"
+              placeholder="Please Enter"
+              v-show="updating">
+          <span
+              class="input flex items-center dark:bg-gray-700"
+              v-show="!updating">
+            {{userDetails.lastname}}
+          </span>
+        </div>
+        <div class="grid grid-cols-2">
+          <span class="my-auto">Email: </span>
+          <span class="input flex items-center dark:bg-gray-700"> {{ userDetails.email }}</span>
+        </div>
       </div>
     </div>
-    <div class="flex w-full justify-end ">
-      <button class="btn mb-4 mx-5" v-on:click="UpdateInfo()">Update Info</button>
+    <div class="flex w-full justify-end px-5">
+      <button class="btn btn-warning" :class="updating ? 'mr-2' : ''" v-on:click="AllowUpdateInfo()">Edit Info
+      </button>
+      <button class="btn btn-success" v-show="updating" v-on:click="EditDetails()">Update Info</button>
     </div>
   </div>
 </template>

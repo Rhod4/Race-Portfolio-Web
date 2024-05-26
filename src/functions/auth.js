@@ -36,7 +36,6 @@ export const authValidation = () => {
             })
          }
          ).catch((error) => console.log(error))
-
    }
 
    const postRegister = async (user) => {
@@ -75,9 +74,12 @@ export const authValidation = () => {
 
    }
 
-   const postProfileData = async () => {
-      return await instance.get("http://localhost:8080/api/Profile/ProfileDetails",  { withCredentials: true}
-      ).then((response) => {
+   const postProfileData = async (userDetails) => {
+      const authStore = useAuthStore();
+
+      return await instance.post("http://localhost:8080/api/Profile/ProfileDetails", {...userDetails}, { withCredentials: true}
+      ).then(async (response) => {
+         await authStore.setUser(response.data)
          console.log(response)
       }).catch((error) => {
          console.log(error)

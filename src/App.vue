@@ -2,10 +2,16 @@
 
 import MainNav from "@/components/navigation/MainNav.vue";
 import {authValidation} from "@/functions/auth.js";
+import {onMounted, ref} from "vue";
+import {useAuthStore} from "@/stores/authStore.js";
 
   const auth = authValidation()
 
-  auth.getUserDetails();
+  const loadingProfileDetails = ref(true)
+
+  onMounted(async () => {
+    await auth.getUserDetails().finally(() => loadingProfileDetails.value = false);
+})
 
 </script>
 
@@ -15,7 +21,7 @@ import {authValidation} from "@/functions/auth.js";
 
   <main class="bg-gray-50 dark:bg-base-100 h-full">
     <main-nav></main-nav>
-    <RouterView></RouterView>
+    <RouterView :loading-profile-details="loadingProfileDetails"></RouterView>
     <footer class="footer">
     </footer>
   </main>

@@ -1,6 +1,6 @@
 <script setup>
   import {useAuthStore} from "@/stores/authStore.js";
-  import {ref} from "vue";
+  import {computed, ref, watch} from "vue";
   import {authValidation} from "@/functions/auth.js";
 
   const auth = authValidation();
@@ -8,8 +8,16 @@
   const logout = async () => {
     await auth.postLogout();
   }
+  const authStore = useAuthStore()
 
-  const authStore = useAuthStore();
+  const profileName = computed(() =>{
+    if(authStore.user.firstname !== undefined || authStore.user.lastname !== undefined)
+      return authStore.user.firstname + " " + authStore.user.lastname
+
+      return profileName.value = "Profile"
+  })
+
+
 </script>
 
 <template>
@@ -35,7 +43,7 @@
           </div>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-          <li><RouterLink to="/Profile">{{ authStore.user.firstname + " " + authStore.user.lastname}}</RouterLink></li>
+          <li><RouterLink to="/Profile">{{ profileName }}</RouterLink></li>
           <li><a>Settings</a></li>
           <li><a v-on:click="logout">Logout</a></li>
         </ul>

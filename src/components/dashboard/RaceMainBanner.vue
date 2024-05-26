@@ -34,8 +34,9 @@ const ShowModal = (race) => {
 </script>
 
 <template>
-  <div class="pb-10 bg-gray-400 flex flex-col min-h-[350px]">
-    <div class="bg-gray-400 pb-2 indicator w-full ">
+  <div class="pb-10 bg-gray-400 flex flex-col min-h-[350px] relative">
+    <div class="absolute flex h-full w-full banner-image"></div>
+    <div class="pb-2 indicator w-full ">
       <div class="indicator-item indicator-center w-full  bg-red">
         <div class="w-full py-8 badge rounded-none border-none split-red flex self-start -ml-1">
           <div class="text-left w-full text-lg xl:text-2xl font-bold ml-2 pb-3 xl:pb-0">UPCOMING RACES</div>
@@ -88,5 +89,12 @@ const ShowModal = (race) => {
   @media (min-width: 450px) {
     background: linear-gradient(125deg, theme('colors.red.800') 50.8%, transparent 0%);
   }
+
+}
+.banner-image {
+  background: url("/src/assets/images/misc/BannerImage.jpg") no-repeat center;
+  filter: blur(10px) brightness(.7);
+  clip-path: inset(0);
+
 }
 </style>

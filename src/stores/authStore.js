@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import router from "@/router/router.js";
+import Swal from "sweetalert2";
 
 export const useAuthStore  =  defineStore("userAuth", {
    state: () => (
@@ -7,13 +9,22 @@ export const useAuthStore  =  defineStore("userAuth", {
             id: undefined,
             firstname: undefined,
             lastname: undefined,
+            email: undefined
          }
    }),
    actions: {
       async setUser(setUser){
-         this.user.id = setUser.id
-         this.user.firstname = setUser.firstname
-         this.user.lastname = setUser.lastname
+         this.user = setUser
+      },
+      async checkLogin() {
+         if(this.user.id === undefined){
+            await Swal.fire({
+               icon: "error",
+               title: "Please Login To View This Page",
+               text: "User Not Logged In"
+            })
+            await router.push("/Account/login")
+         }
       }
    }
 })

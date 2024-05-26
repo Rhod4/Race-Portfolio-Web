@@ -3,13 +3,12 @@ import axios from "axios";
 import {onMounted, reactive, ref, watch} from "vue";
 import SearchBar from "@/components/navigation/SearchBar.vue";
 
-let tracks = reactive([]);
-
-let format = ref(true);
-
-let games = reactive([])
-
-let loading = ref(false);
+const tracks = reactive([]);
+const format = ref(true);
+const games = reactive([])
+const loading = ref(false);
+const page = ref(1)
+const totalPages = ref(10)
 
 onMounted(() => {
   loading.value = true
@@ -17,7 +16,7 @@ onMounted(() => {
       (response) => {
         tracks.push(...response.data.success)
 
-        for (let track of tracks) {
+        for (const track of tracks) {
           if (!games.find((g) => g.id === track.game.id)) {
             games.push(track.game);
           }
@@ -36,8 +35,8 @@ const handleSearch = (value) => {
   trackSearch.value = value;
 };
 
-let trackSearch = ref("");
-let filterGame = ref(null);
+const trackSearch = ref("");
+const filterGame = ref(null);
 
 watch(trackSearch && tracks && filterGame, () => {
   trackFiler();
@@ -71,7 +70,7 @@ function trackFiler() {
             <select class="select select-bordered w-full max-w-xs" v-model="filterGame">
               <option :value="null">No Game</option>
               <option v-for="game in games" :value="game">{{game.name}}</option>
-              <option value="t">t</option>
+              <option value="test">test</option>
             </select>
           </div>
           <div class="ml-2">
@@ -131,10 +130,7 @@ function trackFiler() {
       </div>
     </div>
     <div class="join flex justify-center my-10">
-      <button class="join-item btn">1</button>
-      <button class="join-item btn btn-active">2</button>
-      <button class="join-item btn">3</button>
-      <button class="join-item btn">4</button>
+      <button v-for="pageNumber in totalPages" class="join-item btn" :class="page === pageNumber ? 'btn-active': ''">{{pageNumber}}</button>
     </div>
   </div>
 </template>

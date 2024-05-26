@@ -4,7 +4,7 @@ import {email, helpers, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import {authValidation} from "@/functions/auth.js";
 
-let login = reactive({
+const login = reactive({
   email: "",
   password: "",
 })
@@ -29,8 +29,8 @@ const postLogin = async () => {
 
   if (await v$.value.$validate()){
     const data = await auth.postLogin(login)
-    console.log(data.response)
-    if(data.response.data.status === 401)
+    console.log(data)
+    if(data === 401)
       error.value = true
   }
 }

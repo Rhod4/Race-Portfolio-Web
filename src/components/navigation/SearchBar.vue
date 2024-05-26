@@ -3,9 +3,9 @@
 
 import {ref, watch} from "vue";
 
-  let search = ref("");
+const search = ref("");
 
-  let emit = defineEmits(["search"])
+const emit = defineEmits(["search"])
 
   watch(search, (newValue) => {
     emit("search", newValue)

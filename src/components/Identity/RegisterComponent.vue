@@ -6,7 +6,7 @@ import {authValidation} from "@/functions/auth.js";
 
 const auth = authValidation();
 
-let user = reactive({
+const user = reactive({
   email: "",
   password: "",
   confirmPassword: ""
