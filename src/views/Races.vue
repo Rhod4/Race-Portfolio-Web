@@ -5,7 +5,7 @@ import {onMounted, reactive, ref} from "vue";
 import {raceValidations} from "@/functions/races.js";
 import SearchBar from "@/components/navigation/SearchBar.vue";
 import {useAuthStore} from "@/stores/authStore.js";
-import RaceModal from "@/components/dashboard/RaceModal.vue";
+import RaceModal from "@/components/modals/RaceModal.vue";
 
 const raceVal = raceValidations()
 

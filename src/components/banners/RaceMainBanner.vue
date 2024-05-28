@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import {onMounted, reactive, ref} from "vue";
-import RaceModal from "@/components/dashboard/RaceModal.vue";
+import RaceModal from "@/components/modals/RaceModal.vue";
 import {raceValidations} from "@/functions/races.js";
 
 const raceVal = raceValidations()
@@ -39,7 +39,7 @@ const ShowModal = (race) => {
     <div class="pb-2 indicator w-full ">
       <div class="indicator-item indicator-center w-full  bg-red">
         <div class="w-full py-8 badge rounded-none border-none split-red flex self-start -ml-1">
-          <div class="text-left w-full text-lg xl:text-2xl font-bold ml-2 pb-3 xl:pb-0">UPCOMING RACES</div>
+          <div class="text-left w-full text-lg xl:text-2xl font-bold ml-2 pb-3 xl:pb-0 text-base-100">UPCOMING RACES</div>
         </div>
       </div>
       <div class="flex w-full justify-center mt-2">

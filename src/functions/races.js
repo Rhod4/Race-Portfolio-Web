@@ -1,14 +1,7 @@
 import axios from "axios";
 import {useAuthStore} from "@/stores/authStore.js";
 import Swal from "sweetalert2";
-import {defineComponent} from "vue";
-import BasicDetailsInputComponent from "@/components/profile/BasicDetailsInputComponent.vue";
 import router from "@/router/router.js";
-
-export default defineComponent({
-   components: {BasicDetailsInputComponent}
-})
-
 
 export const raceValidations = () => {
    const authstore = useAuthStore()

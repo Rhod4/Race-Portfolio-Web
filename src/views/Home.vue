@@ -1,7 +1,7 @@
 <script setup>
-import RaceMainBanner from "@/components/dashboard/RaceMainBanner.vue";
+import RaceMainBanner from "@/components/banners/RaceMainBanner.vue";
 import {useAuthStore} from "@/stores/authStore.js";
-import CreateAccountMainBanner from "@/components/dashboard/CreateAccountMainBanner.vue";
+import CreateAccountMainBanner from "@/components/banners/CreateAccountMainBanner.vue";
 
 const authStore = useAuthStore()
 </script>
