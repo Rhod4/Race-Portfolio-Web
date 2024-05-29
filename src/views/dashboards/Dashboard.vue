@@ -14,8 +14,8 @@ const page = ref(1);
 </script>
 
 <template>
-  <div class="flex min-h-[500px] h-full">
-    <div class="w-1/4 flex h-full">
+  <div class="grid grid-cols-1 sm:grid-cols-4 min-h-[500px] h-full">
+    <div class="col-span-1 h-full">
       <div class="p-10 h-full">
         <div class="border border-gray-200 shadow-2xl h-full rounded-xl flex flex-col">
           <div class="p-2">
@@ -32,8 +32,8 @@ const page = ref(1);
         </div>
       </div>
     </div>
-    <div class="w-3/4 flex">
-      <div class="m-10 border border-gray-200 dark:border-gray-900 w-full shadow-2xl rounded-xl">
+    <div class="col-span-3">
+      <div class="m-10 border border-gray-200 dark:border-gray-900 shadow-2xl rounded-xl">
 <!--        admin component-->
         <div class="flex flex-col" v-show="page === 0">
           <div class="p-3 ps-4">

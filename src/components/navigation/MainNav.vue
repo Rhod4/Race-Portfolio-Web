@@ -28,13 +28,13 @@
     <div class="navbar-center">
       <ul class="menu menu-horizontal px-1">
         <li v-show="authStore.user.id !== undefined">
-          <RouterLink to="/Dashboard" class="text-2xl mx-2 dark:text-white font-semibold">Dashboard</RouterLink>
+          <RouterLink to="/Dashboard" class="sm:text-2xl sm:mx-2 dark:text-white font-semibold">Dashboard</RouterLink>
         </li>
         <li>
-          <RouterLink to="/Races" class="text-2xl mx-2 dark:text-white font-semibold">Race</RouterLink>
+          <RouterLink to="/Races" class="sm:text-2xl sm:mx-2 dark:text-white font-semibold">Race</RouterLink>
         </li>
         <li>
-          <RouterLink to="/Tracks" class="text-2xl mx-2 dark:text-white font-semibold">Tracks</RouterLink>
+          <RouterLink to="/Tracks" class="sm:text-2xl sm:mx-2 dark:text-white font-semibold">Tracks</RouterLink>
         </li>
       </ul>
     </div>

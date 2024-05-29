@@ -17,11 +17,17 @@ export const raceAdminValidation = () => {
    }
 
    const getSeriesForGame = async (gameId: string) : Promise<any>  => {
-      return axios.get(`/api/Series/GetSeriesByGame/${gameId}`)
+      return await axios.get(`/api/Series/GetSeriesByGame/${gameId}`)
           .then(response =>
              response.data
           )
    }
+   const getTracksForGame = async (gameId: string) : Promise<any>  => {
+       return await axios.get(`/api/Track/AllTracksByGame/${gameId}`)
+           .then(response =>
+               response.data
+           )
+   }
 
-   return({getAdminRacesForUser, createRace,getSeriesForGame})
+   return({getAdminRacesForUser, createRace, getSeriesForGame, getTracksForGame})
 }
