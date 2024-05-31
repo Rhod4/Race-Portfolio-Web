@@ -34,11 +34,16 @@ const getParticipants = async () => {
       response
   )
 }
+const getRaceSeriesForGame = async (gameId) => {
+  return await raceValidate.getCarsForSeries(gameId);
+}
 
 onMounted(async () => {
-      race.details = await getRaceDetails()
+
+  race.details = await getRaceDetails()
       isParticipating.value = await raceValidate.checkIfRacing(route.params.id);
       race.participants = await getParticipants()
+      await getRaceSeriesForGame(race.details.game.id)
     }
 )
 

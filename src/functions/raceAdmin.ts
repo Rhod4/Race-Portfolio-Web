@@ -10,7 +10,8 @@ export const raceAdminValidation = () => {
    }
 
    const createRace = async (createRaceRequest: CreateRaceRequest) : Promise<any>  => {
-      return axios.post("/api/AdminRace/CreateRace",{createRaceRequest} , {withCredentials: true})
+       console.log(createRaceRequest);
+      return axios.post("/api/AdminRace/CreateRace", createRaceRequest , {withCredentials: true})
           .then(response => {
              console.log(response);
           })

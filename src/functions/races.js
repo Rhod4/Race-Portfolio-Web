@@ -105,5 +105,18 @@ export const raceValidations = () => {
          }
       )
    }
-   return {getRaces, getRace, getDashboardRaces, addToRace, removedFromRace, checkIfRacing, getParticipants}
+
+   const getCarsForSeries = async (gameId) => {
+      return await axios.get(`/api/Series/GetSeriesAndCarsByGame/${gameId}`, {
+         withCredentials: true,
+      })
+         .then(response => {
+            console.log(response)
+            return response.data.participants
+         })
+   }
+
+   return {getRaces, getRace, getDashboardRaces, addToRace,
+      removedFromRace, checkIfRacing, getParticipants,
+      getCarsForSeries}
 }

@@ -7,7 +7,7 @@ import {GameAdminResponse} from "@/types/races/gamesAdminResponse";
 
 const raceAdmin = raceAdminValidation()
 
-const race = reactive<CreateRaceRequest>({})
+const race = reactive<CreateRaceRequest>({RaceDate: new Date(Date.now())})
 
 defineProps({
   race: {
@@ -19,6 +19,7 @@ defineProps({
 const gameVal = gameValidation();
 
 const createRace = async () => {
+  console.log(race)
   await raceAdmin.createRace(race)
 }
 const loading = ref(true);
@@ -76,7 +77,7 @@ onMounted(async () => {
         </select>
       </div>
       <div class="flex mt-4 justify-end">
-        <button class="btn btn-success w-full sm:w-1/6">
+        <button class="btn btn-success w-full sm:w-1/6" v-on:click="createRace()">
           Create Race
         </button>
       </div>
