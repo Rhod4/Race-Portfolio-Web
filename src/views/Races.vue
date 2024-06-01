@@ -18,7 +18,6 @@ const RaceModalRef = ref("RaceModalRef")
 const searchFilter = ref("")
 
 const handleSearch = (val) => {
-  if(val)
     searchFilter.value = val;
 }
 
@@ -43,7 +42,7 @@ const ShowModal = (race) => {
       </div>
       <div class="grid grid-cols-3 gap-2">
       <div
-          v-for="race in data.races.filter(val => searchFilter? val.game.name.includes(searchFilter) : val )">
+          v-for="race in data.races.filter(val => searchFilter !== '' ? val.name.includes(searchFilter) : val )">
       <div class="card bg-base-100 shadow-xl image-full z-10 mx-5"
            type="button"
       >

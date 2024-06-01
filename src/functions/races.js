@@ -71,7 +71,7 @@ export const raceValidations = () => {
          withCredentials: true,
       })
          .then(response => {
-            return response.data.isParticipating;
+            return response.data;
          })
          .catch(error => {
             console.error("There was a problem with the Axios request:", error);
@@ -85,7 +85,7 @@ export const raceValidations = () => {
       })
          .then(response => {
             console.log(response.data)
-            return response.data.participants
+            return response.data
          })
          .catch(error => {
             console.error("There was a problem with the Axios request:", error);
