@@ -47,7 +47,7 @@ const ShowModal = (race) => {
       <div class="card bg-base-100 shadow-xl image-full z-10 mx-5"
            type="button"
       >
-        <figure><img :src="'/src/assets/images/games/' + race.id + '.png'"
+        <figure><img :src="'/src/assets/images/games/' + race.game.id + '.png'"
                      class="blur"
                      style="--tw-blur: blur(2px)" alt="IRacing"/></figure>
         <div class="card-body">

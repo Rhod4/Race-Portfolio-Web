@@ -17,7 +17,6 @@
       return profileName.value = "Profile"
   })
 
-
 </script>
 
 <template>

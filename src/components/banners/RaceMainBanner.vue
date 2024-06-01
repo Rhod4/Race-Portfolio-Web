@@ -45,13 +45,13 @@ const ShowModal = (race) => {
       <div class="flex w-full justify-center mt-2">
         <div
             v-for="(race, index) in races"
-            :class="index === 1 ? '' : '!hidden lg:!grid'"
+            :class="index === 0 ? '' : '!hidden lg:!grid'"
             v-if="loading === false"
         >
           <div class="card bg-base-100 shadow-xl image-full z-10 mx-5"
                type="button"
           >
-            <figure><img :src="'/src/assets/images/games/' + race.id + '.png'"
+            <figure><img :src="'/src/assets/images/games/' + race.game.id + '.png'"
                          class="blur"
                          style="--tw-blur: blur(2px)" alt="IRacing"/></figure>
             <div class="card-body">

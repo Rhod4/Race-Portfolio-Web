@@ -47,7 +47,7 @@ export const raceValidations = () => {
             carId
          }
       })
-         .then(response => {
+         .then(() => {
             return true;
          })
          .catch(error => {
@@ -84,6 +84,7 @@ export const raceValidations = () => {
          withCredentials: true,
       })
          .then(response => {
+            console.log(response.data)
             return response.data.participants
          })
          .catch(error => {
@@ -111,9 +112,11 @@ export const raceValidations = () => {
          withCredentials: true,
       })
          .then(response => {
-            console.log(response)
-            return response.data.participants
+            return response.data
          })
+         .catch(e => {
+            console.log(e)
+         return []})
    }
 
    return {getRaces, getRace, getDashboardRaces, addToRace,
