@@ -15,8 +15,19 @@ export const raceValidations = () => {
             console.error("There was a problem with the Axios request:", error);
          });
    }
+
    const getDashboardRaces = async () => {
       return await axios.get("api/Race/Races/" + 2, { withCredentials: true})
+         .then(response => {
+            return response.data;
+         })
+         .catch(error => {
+            console.error("There was a problem with the Axios request:", error);
+         });
+   }
+
+   const getRaceCards = async () => {
+      return await axios.get("api/Race/RaceCards")
          .then(response => {
             return response.data;
          })
@@ -119,7 +130,7 @@ export const raceValidations = () => {
          return []})
    }
 
-   return {getRaces, getRace, getDashboardRaces, addToRace,
+   return {getRaces, getRace, getRaceCards, getDashboardRaces, addToRace,
       removedFromRace, checkIfRacing, getParticipants,
       getCarsForSeries}
 }

@@ -30,10 +30,10 @@
           <RouterLink to="/Dashboard" class="sm:text-2xl sm:mx-2 text-neutral dark:text-white font-semibold">Dashboard</RouterLink>
         </li>
         <li>
-          <RouterLink to="/Races" class="sm:text-2xl sm:mx-2 dark:text-white font-semibold">Race</RouterLink>
+          <RouterLink to="/Races" class="sm:text-2xl sm:mx-2 text-neutral dark:text-white font-semibold">Race</RouterLink>
         </li>
         <li>
-          <RouterLink to="/Tracks" class="sm:text-2xl sm:mx-2 dark:text-white font-semibold">Tracks</RouterLink>
+          <RouterLink to="/Tracks" class="sm:text-2xl sm:mx-2 text-neutral dark:text-white font-semibold">Tracks</RouterLink>
         </li>
       </ul>
     </div>

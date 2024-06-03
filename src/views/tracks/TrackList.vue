@@ -67,14 +67,14 @@ function trackFiler() {
       <div class="grow-0">
         <div class="flex">
           <div class="">
-            <select class="select select-bordered w-full max-w-xs" v-model="filterGame">
+            <select class="select select-bordered w-full max-w-xs bg-neutral-100 text-gray-700 dark:bg-base-100 dark:text-white" v-model="filterGame">
               <option :value="null">No Game</option>
               <option v-for="game in games" :value="game">{{game.name}}</option>
               <option value="test">test</option>
             </select>
           </div>
           <div class="ml-2">
-            <label class="btn btn-circle swap swap-rotate static z-0">
+            <label class="btn btn-circle btn-ghost swap swap-rotate static z-0 bg-neutral-100 text-gray-500 dark:bg-base-100 dark:text-gray-300">
               <input type="checkbox" v-on:click="format = !format"/>
               <svg class="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
                    viewBox="0 0 512 512">
@@ -97,7 +97,7 @@ function trackFiler() {
             <figure><img :src="'/src/assets/images/tracks/'+track.id+'.png'" :alt="track.name"
                          class="object-fill rounded-xl"/></figure>
           </div>
-          <div class="card-body">
+          <div class="card-body bg-gray-300 text-gray-700 dark:bg-base-100 dark:text-gray-300">
             <h2 class="card-title">{{ track.name }}</h2>
             <p></p>
             <div class="card-actions justify-end">

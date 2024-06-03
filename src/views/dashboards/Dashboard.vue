@@ -5,8 +5,8 @@ import UserAdminRacesDashboard from "@/components/dashboard/UserAdminRacesDashbo
 
 const roles = reactive([
   {name: "Admin"},
-  {name: "Racer"},
-  {name: "RaceAdmin"}
+  {name: "Races"},
+  {name: "Race Admin"}
 ]);
 
 const page = ref(1);
