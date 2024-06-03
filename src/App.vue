@@ -17,10 +17,10 @@ import {useAuthStore} from "@/stores/authStore.js";
 
 <template>
   <header>
+    <main-nav></main-nav>
   </header>
 
-  <main class="bg-gray-50 dark:bg-base-100 h-full">
-    <main-nav></main-nav>
+  <main class=" h-full  flex-1 flex flex-col bg-neutral-200 dark:bg-base-100 ">
     <RouterView></RouterView>
     <footer class="footer">
     </footer>

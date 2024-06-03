@@ -1,11 +1,11 @@
 <script setup>
 
 import {raceValidations} from "@/functions/races.js";
+import {useRoute} from 'vue-router'
+import {onMounted, reactive, ref, watch} from "vue";
+import RaceParticipantsTable from "@/components/tables/RaceParticipantsTable.vue";
 
 const raceValidate = raceValidations()
-import {useRoute} from 'vue-router'
-import {computed, onMounted, reactive, ref, watch} from "vue";
-import Swal from "sweetalert2";
 
 const race = reactive({})
 const route = useRoute()
@@ -44,7 +44,6 @@ const getRaceSeriesForGame = async (gameId) => {
 }
 
 onMounted(async () => {
-
       race.details = await getRaceDetails()
       isParticipating.value = await raceValidate.checkIfRacing(route.params.id);
       race.participants = await getParticipants()
@@ -92,7 +91,7 @@ watch(selectedSeries, (newVal) => {
               {Rating type}
             </div>
             <div class="badge badge-warning mx-1">
-              {P-Q-R}
+              P-Q-R
             </div>
             <div class="badge py-2 badge-warning mx-1">
               <span class="mr-2">{{ race.details.raceParticipants.length }}</span>
@@ -116,46 +115,7 @@ watch(selectedSeries, (newVal) => {
         </div>
       </div>
       <div class="p-4 shadow-xl mt-4 rounded-2xl bg-white dark:bg-gray-800">
-        <table class="table">
-          <thead>
-          <tr>
-            <th>
-              <span class="badge">Number</span>
-            </th>
-            <th>
-              <span class="badge">Driver</span>
-            </th>
-            <th>
-              <span class="badge">Car</span>
-            </th>
-            <th>
-              <span class="badge">Session Laps</span>
-            </th>
-            <th>
-              <span class="badge">Session Best Time</span>
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="raceParticipants in race.participants">
-            <td>
-              {{ raceParticipants.userRaceNumber }}
-            </td>
-            <td>
-              {{ raceParticipants.profile.firstname }} {{ raceParticipants.profile.lastname }}
-            </td>
-            <td>
-              {{ raceParticipants.car.name }}
-            </td>
-            <td>
-              13
-            </td>
-            <td>
-              1:36:451
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <RaceParticipantsTable :race-participants="race.participants"/>
       </div>
     </div>
   </div>
@@ -190,7 +150,3 @@ watch(selectedSeries, (newVal) => {
     </div>
   </dialog>
 </template>
-
-<style scoped>
-
-</style>

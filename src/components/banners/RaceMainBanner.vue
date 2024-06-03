@@ -34,36 +34,38 @@ const ShowModal = (race) => {
 </script>
 
 <template>
-  <div class="pb-10 bg-gray-400 flex flex-col min-h-[350px] relative">
+  <div class="pb-10 bg-gray-400 flex flex-col min-h-[400px] relative">
     <div class="absolute flex h-full w-full banner-image"></div>
     <div class="pb-2 indicator w-full ">
-      <div class="indicator-item indicator-center w-full  bg-red">
+      <div class="indicator-item indicator-center w-full bg-red">
         <div class="w-full py-8 badge rounded-none border-none split-red flex self-start -ml-1">
-          <div class="text-left w-full text-lg xl:text-2xl font-bold ml-2 pb-3 xl:pb-0 text-base-100">UPCOMING RACES</div>
+          <div class="text-left w-full text-lg xl:text-2xl font-bold ml-2 pb-3 xl:pb-0 text-neutral-200 dark:text-neutral-300">UPCOMING RACES</div>
         </div>
       </div>
       <div class="flex w-full justify-center mt-2">
         <div
-            v-for="(race, index) in races"
-            :class="index === 0 ? '' : '!hidden lg:!grid'"
             v-if="loading === false"
+            v-for="(race, index) in races"
+            :key="race.id"
+            :class="index === 0 ? '' : '!hidden lg:!grid'"
+            class="loadIn"
         >
-          <div class="card bg-base-100 shadow-xl image-full z-10 mx-5"
+          <div class="card bg-neutral-100 dark:bg-base-100 shadow-xl image-full z-10 mx-5"
                type="button"
           >
             <figure><img :src="'/src/assets/images/games/' + race.game.id + '.png'"
-                         class="blur"
-                         style="--tw-blur: blur(2px)" alt="IRacing"/></figure>
+                         class="blur p-4"
+                         style="--tw-blur: blur(2px)" alt="IRacing"/>
+            </figure>
             <div class="card-body">
-              <h2 class="card-title">{{ race.name }}</h2>
-              <span>Race Description</span>
+              <h2 class="card-title text-2xl font-bold text-neutral-200">{{ race.name }}</h2>
               <div class="card-actions justify-end mt-auto">
-                <div class="badge py-3 badge-ghost dark:badge-ghost">
+                <div class="badge py-3 badge-success">
                   <span class="mr-2">0</span>
                   <img src="/src/assets/images/misc/helmet.svg" class="max-w-[20px]"/>
                 </div>
               </div>
-              <button class="btn" v-on:click="ShowModal(race)">Find Out More!</button>
+              <button class="btn btn-neutral" v-on:click="ShowModal(race)">Find Out More!</button>
             </div>
           </div>
         </div>
@@ -95,6 +97,19 @@ const ShowModal = (race) => {
   background: url("/src/assets/images/misc/BannerImage.jpg") no-repeat center;
   filter: blur(4px) brightness(.7);
   clip-path: inset(0);
+}
 
+.loadIn{
+  animation: fadeInAnimation  2s forwards;
+  z-index: 1;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>

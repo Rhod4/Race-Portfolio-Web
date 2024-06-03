@@ -23,7 +23,6 @@ const handleSearch = (val) => {
 
 onMounted(async () => {
   data.races = await raceVal.getRaces()
-  console.log(data.races)
 })
 
 const ShowModal = (race) => {
@@ -50,12 +49,15 @@ const ShowModal = (race) => {
                      class="blur"
                      style="--tw-blur: blur(2px)" alt="IRacing"/></figure>
         <div class="card-body">
-          <h2 class="card-title">{{ race.name }}</h2>
-          <span>Race Description</span>
+          <h2 class="card-title text-neutral-200">{{ race.name }}</h2>
+          <div class="flex flex-col">
+            <span class="text-neutral-200">{{ new Date(race.raceDate).toLocaleDateString() }}</span>
+            <span class="text-neutral-200">{{ new Date(race.raceDate).toLocaleTimeString() }}</span>
+          </div>
           <div class="card-actions justify-end mt-auto">
-            <div class="badge py-3 badge-ghost dark:badge-ghost">
+            <div class="badge py-3 badge-success">
               <span class="mr-2">0</span>
-              <img src="/src/assets/images/misc/helmet.svg" class="max-w-[20px]"/>
+              <img src="/src/assets/images/misc/helmet.svg" class="max-w-[20px]" alt="racers"/>
             </div>
           </div>
           <button class="btn" v-on:click="ShowModal(race)" v-if="!authStore.user.id">Find Out More!</button>

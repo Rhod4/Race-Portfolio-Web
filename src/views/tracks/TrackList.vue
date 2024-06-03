@@ -58,7 +58,7 @@ function trackFiler() {
 </script>
 
 <template>
-  <div class=" pt-4 px-10 pb-4">
+  <div class="pt-4 px-10 pb-4 flex flex-col flex-1">
     <div class="w-full text-center">View all the tracks we have to offer with more being added all the time</div>
     <div class="flex">
       <div class="grow">

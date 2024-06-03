@@ -14,10 +14,11 @@ const page = ref(1);
 </script>
 
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-4 min-h-[500px] h-full">
-    <div class="col-span-1 h-full bg-gray-100 dark:bg-neutral flex ">
-      <div class="p-10 h-full">
-        <div class=" h-full rounded-xl flex flex-col">
+  <div class="flex flex-col flex-1">
+  <div class="grid grid-cols-1 sm:grid-cols-4 h-full flex-1">
+    <div class="col-span-1 bg-gray-100 dark:bg-neutral flex shadow-xl sm:shadow-none">
+      <div class="p-10">
+        <div class="rounded-xl flex flex-col">
           <div class="p-2">
             <span class="text-2xl ">Dashboard Roles</span>
           </div>
@@ -65,5 +66,6 @@ const page = ref(1);
         <UserAdminRacesDashboard v-show="page === 2"/>
       </div>
     </div>
+  </div>
   </div>
 </template>

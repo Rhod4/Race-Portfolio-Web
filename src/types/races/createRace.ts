@@ -1,4 +1,5 @@
 export type CreateRaceRequest = {
+ "Id": string,
  "Name": string,
  "RaceDate": Date,
  "GameId": string,

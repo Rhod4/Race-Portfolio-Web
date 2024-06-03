@@ -27,7 +27,7 @@
     <div class="navbar-center">
       <ul class="menu menu-horizontal px-1">
         <li v-show="authStore.user.id !== undefined">
-          <RouterLink to="/Dashboard" class="sm:text-2xl sm:mx-2 dark:text-white font-semibold">Dashboard</RouterLink>
+          <RouterLink to="/Dashboard" class="sm:text-2xl sm:mx-2 text-neutral dark:text-white font-semibold">Dashboard</RouterLink>
         </li>
         <li>
           <RouterLink to="/Races" class="sm:text-2xl sm:mx-2 dark:text-white font-semibold">Race</RouterLink>

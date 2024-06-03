@@ -3,6 +3,11 @@
 @tailwind utilities;
 @tailwind variants;
 
+html,
+body {
+  height: 100%;
+}
+
 .input-error{
   display: flex;
   width: 100%;

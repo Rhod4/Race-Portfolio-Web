@@ -26,7 +26,7 @@ export const raceValidations = () => {
    }
 
    const getRace = async (id) => {
-      return await axios.get("api/Race/Race/"+id, { withCredentials: true})
+      return await axios.get(`api/Race/Race/${id}`, { withCredentials: true})
          .then(response => {
             return response.data;
          })

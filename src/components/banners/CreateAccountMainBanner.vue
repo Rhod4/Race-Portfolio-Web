@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="py-16 w-full flex flex-col items-center">
+  <div class="py-16 w-full flex flex-col items-center text-neutral-600 dark:text-neutral-400">
     <div class="text-2xl mt-1">Hot Join Races Or Join Leagues</div>
     <div class="text-2xl mt-1">Solo Race or Driver Swap</div>
     <div class="text-2xl mt-1">Sprint Race, Rally, Endurance, Oval</div>
