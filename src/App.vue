@@ -22,7 +22,7 @@ onMounted(async () => {
 
   <main class=" h-full  flex-1 flex flex-col bg-neutral-200 dark:bg-base-100 ">
     <RouterView></RouterView>
-    <footer class="footer bg-gray-500 py-5">
+    <footer class="footer bg-gray-500 py-5 border-t-4 border-t-red-700">
       <div class="grid grid-cols-4 justify-center w-full text-gray-100">
         <div class="flex justify-center w-full">
           <span class="text-3xl">RP</span>
