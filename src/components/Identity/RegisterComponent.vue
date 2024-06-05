@@ -29,7 +29,6 @@ const rules = computed(() => ({
 const v$ = useVuelidate(rules, user)
 
 const postRegister = async () => {
-console.log("t")
   if (await v$.value.$validate())
     await auth.postRegister(user);
 }
