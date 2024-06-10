@@ -1,7 +1,7 @@
 <script setup>
   import {useAuthStore} from "../../stores/authStore.js";
   import {computed, ref, watch} from "vue";
-  import {authValidation} from "../../functions/auth.js";
+  import {authValidation} from "~/composables/auth.js";
 
   const auth = authValidation();
 
@@ -22,15 +22,15 @@
 <template>
   <div class="navbar drop-shadow bg-gray-100 dark:bg-neutral pb-4 px-4">
     <div class="navbar-start">
-      <RouterLink to="/" class="text-2xl mx-2 dark:text-white font-bold">RP</RouterLink>
+      <NuxtLink to="/" class="text-2xl mx-2 dark:text-white font-bold">RP</NuxtLink>
     </div>
     <div class="navbar-center">
       <ul class="menu menu-horizontal px-1">
         <li v-show="authStore.user.id !== undefined">
-          <RouterLink to="/Dashboard" class="sm:text-2xl sm:mx-2 text-neutral dark:text-white font-semibold">Dashboard</RouterLink>
+          <NuxtLink to="/Dashboard" class="sm:text-2xl sm:mx-2 text-neutral dark:text-white font-semibold">Dashboard</NuxtLink>
         </li>
         <li>
-          <RouterLink to="/Races" class="sm:text-2xl sm:mx-2 text-neutral dark:text-white font-semibold">Race</RouterLink>
+          <NuxtLink to="/Races" class="sm:text-2xl sm:mx-2 text-neutral dark:text-white font-semibold">Race</NuxtLink>
         </li>
         <li>
           <NuxtLink to="/Tracks" class="sm:text-2xl sm:mx-2 text-neutral dark:text-white font-semibold">Tracks</NuxtLink>
@@ -45,7 +45,7 @@
           </div>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[100] p-2 shadow bg-base-100 rounded-box w-52">
-          <li><RouterLink to="/Profile">{{ profileName }}</RouterLink></li>
+          <li><NuxtLink to="/Profile">{{ profileName }}</NuxtLink></li>
           <li><a>Settings</a></li>
           <li><a v-on:click="logout">Logout</a></li>
         </ul>

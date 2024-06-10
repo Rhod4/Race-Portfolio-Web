@@ -4,8 +4,15 @@
 @tailwind variants;
 
 html,
-body {
+body,{
   height: 100%;
+}
+
+#app,
+#__nuxt{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .input-error{
@@ -15,4 +22,8 @@ body {
 }
 .error-msg {
   color: theme("colors.red.700")
+}
+
+table thead tr {
+  color: theme("colors.neutral");
 }

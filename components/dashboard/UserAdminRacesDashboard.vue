@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 
-import {raceAdminValidation} from "../../functions/raceAdmin";
+import {raceAdminValidation} from "~/composables/raceAdmin";
 import {onMounted, reactive, ref} from "vue";
 import ManageRace from "@/components/dashboard/ManageRaceDashboard.vue";
 

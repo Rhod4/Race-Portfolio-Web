@@ -2,7 +2,7 @@
 import {email, helpers, required, sameAs} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import {computed, reactive} from "vue";
-import {authValidation} from "../../functions/auth.js";
+import {authValidation} from "~/composables/auth.js";
 
 const auth = authValidation();
 
@@ -83,11 +83,11 @@ const postRegister = async () => {
       <button class="btn w-full mt-4">Register</button>
     </form>
     <div class="mt-2">
-      <RouterLink class="btn text-center btn-ghost w-full"
+      <NuxtLink class="btn text-center btn-ghost w-full"
                   to="/auth"
       >
         Already have an account?
-      </RouterLink>
+      </NuxtLink>
     </div>
   </div>
 </template>

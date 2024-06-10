@@ -6,8 +6,14 @@ export const authValidation = () => {
 
    const postLogin = async (login) => {
 
-      return await instance.post("http://localhost:8080/login", login, {params: {useCookies: true}, withCredentials: true}
-      ).then(() =>{
+      return await $fetch("http://localhost:8080/login",
+         login,
+         {
+            method: "POST",
+            params: {useCookies: true},
+            withCredentials: true
+         }
+      ).then(() => {
             getUserDetails();
             Swal.mixin({
                position: "top-end",
@@ -22,34 +28,34 @@ export const authValidation = () => {
 
    const postLogout = async () => {
       const authStore = useAuthStore();
-      await instance.post("api/auth/logout", {},{withCredentials:true})
+      await instance.post("api/auth/logout", {}, {withCredentials: true})
          .then(() => {
-            authStore.$reset()
-            // router.push('/')
-            Swal.mixin({
-               position: "top-end",
-               title: "Successfully Logged Out",
-               showConfirmButton: false,
-               timer: 1500
-            })
-         }
+               authStore.$reset()
+               // router.push('/')
+               Swal.mixin({
+                  position: "top-end",
+                  title: "Successfully Logged Out",
+                  showConfirmButton: false,
+                  timer: 1500
+               })
+            }
          ).catch((error) => console.log(error))
    }
 
    const postRegister = async (user) => {
-      const data ={
-         email : user.email,
-         password : user.password,
+      const data = {
+         email: user.email,
+         password: user.password,
       }
       await instance.post("http://localhost:8080/register", data, {params: {useCookies: true}, withCredentials: true}
-      ).then(() =>{
-         Swal.mixin({
-            position: "top-end",
-            title: "Successfully Registered",
-            showConfirmButton: false,
-            timer: 1500,
-         })
-         // router.push('/Account/RoleSelector')
+      ).then(() => {
+            Swal.mixin({
+               position: "top-end",
+               title: "Successfully Registered",
+               showConfirmButton: false,
+               timer: 1500,
+            })
+            // router.push('/Account/RoleSelector')
          }
       ).catch((error) => {
          console.log(error)
@@ -63,19 +69,19 @@ export const authValidation = () => {
    const getUserDetails = async () => {
       const authStore = useAuthStore();
 
-      return await instance.get("http://localhost:8080/api/Profile/Profile",  { withCredentials: true}
-         ).then(async (response) =>{
+      return await instance.get("http://localhost:8080/api/Profile/Profile", {withCredentials: true}
+      ).then(async (response) => {
             await authStore.setUser(response.data)
             return response.data
          }
-         ).catch((error) => console.log(error))
+      ).catch((error) => console.log(error))
 
    }
 
    const postProfileData = async (userDetails) => {
       const authStore = useAuthStore();
 
-      return await instance.post("http://localhost:8080/api/Profile/ProfileDetails", {...userDetails}, { withCredentials: true}
+      return await instance.post("http://localhost:8080/api/Profile/ProfileDetails", {...userDetails}, {withCredentials: true}
       ).then(async (response) => {
          await authStore.setUser(response.data)
          console.log(response)

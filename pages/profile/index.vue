@@ -1,6 +1,6 @@
 <script setup>
 
-import BasicDetailsInputComponent from "../components/profile/BasicDetailsInputComponent.vue";
+import BasicDetailsInputComponent from "../../components/profile/BasicDetailsInputComponent.vue";
 
 
 
@@ -26,13 +26,13 @@ import BasicDetailsInputComponent from "../components/profile/BasicDetailsInputC
         </div>
       </div>
     </div>
-    <div class="col-span-12 order-last mt-10  bg-gray-700 rounded-xl p-2">
+    <div class="col-span-12 shadow-xl order-last mt-10 bg-gray-200 dark:bg-gray-700 rounded-xl p-2">
       <div>
-        <span class="text-xl font-bold">Recent Races</span>
+        <span class="text-xl font-bold text-neutral-700 dark:text-base">Recent Races</span>
       </div>
-      <table class="w-full table">
+      <table class="w-full table text-neutral-700 dark:text-base">
         <thead>
-          <tr>
+          <tr class="text-neutral-700 dark:text-base">
             <th>Race</th>
             <th>Track</th>
             <th>Date</th>

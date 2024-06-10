@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CreateRaceRequest} from "../types/races/createRace";
+import type {CreateRaceRequest} from "~/types/races/createRace";
 
 export const raceAdminValidation = () => {
 

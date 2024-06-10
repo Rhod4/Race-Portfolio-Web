@@ -1,9 +1,10 @@
 <script setup>
 
-import {raceValidations} from "../../functions/races.js";
+import {raceValidations} from "~/composables/races.js";
 import {onMounted, reactive, ref, watch} from "vue";
-import RaceParticipantsTable from "../../components/tables/RaceParticipantsTable.vue";
+import RaceParticipantsTable from "../../../components/tables/RaceParticipantsTable.vue";
 
+const route = useRoute()
 const raceValidate = raceValidations()
 
 const race = reactive({})
@@ -15,7 +16,6 @@ const getRaceDetails = async () => {
 const isParticipating = ref(false)
 
 const selectedCar = ref()
-const isAdded = ref()
 const selectedSeriesCars = ref()
 
 const showAddToRaceModal = async () => {
@@ -23,13 +23,15 @@ const showAddToRaceModal = async () => {
 }
 
 const addToRace = async () => {
-  isParticipating.value = await raceValidate.addToRace(route.params.id, 1, selectedCar.value)
-  await getParticipants();
+  await raceValidate.addToRace(route.params.id, 1, selectedCar.value).then((res) => {
+    reloadNuxtApp();})
+
 }
 
 const RemoveFromRace = async () => {
-  await raceValidate.removedFromRace(route.params.id).then(() =>
-      isParticipating.value = false)
+  await raceValidate.removedFromRace(route.params.id).then(() => reloadNuxtApp())
+
+  ;
 }
 
 const getParticipants = async () => {
@@ -58,7 +60,7 @@ watch(selectedSeries, (newVal) => {
 <template>
   <div class="">
     <div class="mx-10 flex flex-col" v-if="race.details != null">
-      <div class="mt-5 px-4 py-2 rounded-b-xl shadow-xl">
+      <div class="mt-5 px-4 py-2 rounded-b-xl shadow-xl text-neutral-600 dark:text-neutral-400">
         <div class=" grid grid-cols-12 border-b dark:border-b-gray-700 pb-2">
           <div class="col-span-10 flex flex-col">
             <div class="text-3xl">
@@ -93,7 +95,7 @@ watch(selectedSeries, (newVal) => {
             </div>
             <div class="badge py-2 badge-warning mx-1">
               <span class="mr-2">{{ race.details.raceParticipants.length }}</span>
-              <img src="/assets/images/misc/helmet.svg" class="max-w-[15px]"/>
+              <img src="/img/misc/helmet.svg" class="max-w-[15px]"/>
             </div>
           </div>
           <div class="mb-5 mx-5 grid grid-cols-3">

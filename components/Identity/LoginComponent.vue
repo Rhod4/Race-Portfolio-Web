@@ -2,7 +2,7 @@
 import {computed, reactive, ref} from "vue";
 import {email, helpers, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
-import {authValidation} from "../../functions/auth.js";
+import {authValidation} from "~/composables/auth.js";
 
 const login = reactive({
   email: "",
@@ -74,11 +74,11 @@ const postLogin = async () => {
       <button class="btn w-full mt-4">login</button>
     </form>
     <div class="mt-2">
-      <RouterLink class="btn text-center btn-ghost w-full"
+      <NuxtLink class="btn text-center btn-ghost w-full"
                   to="/Account/register"
       >
         Dont have an account?
-      </RouterLink>
+      </NuxtLink>
     </div>
   </div>
 </template>

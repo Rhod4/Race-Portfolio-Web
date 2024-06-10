@@ -43,9 +43,9 @@
           0: drivers in race
         </div>
       </div>
-      <RouterLink v-if="canJoinRace">
+      <NuxtLink v-if="canJoinRace">
         Join Race
-      </RouterLink>
+      </NuxtLink>
     </div>
     <form method="dialog" class="modal-backdrop">
       <button class="cursor-default">close</button>

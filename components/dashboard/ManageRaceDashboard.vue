@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {raceAdminValidation} from "@/functions/raceAdmin";
-import {onMounted, PropType, reactive, ref, watch} from "vue";
-import {gameValidation} from "@/functions/games";
-import {CreateRaceRequest} from "@/types/races/createRace";
-import {GameAdminResponse} from "@/types/races/gamesAdminResponse";
+import {raceAdminValidation} from "~/composables/raceAdmin";
+import {onMounted, reactive, ref, watch} from "vue";
+import {gameValidation} from "~/composables/games";
+import {type CreateRaceRequest} from "@/types/races/createRace";
+import {type GameAdminResponse} from "@/types/races/gamesAdminResponse";
 
 const raceAdmin = raceAdminValidation()
 

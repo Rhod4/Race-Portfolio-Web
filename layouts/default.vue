@@ -2,7 +2,7 @@
 
 import './assets/main.css'
 import MainNav from "../components/navigation/MainNav.vue";
-import {authValidation} from "../functions/auth.js";
+import {authValidation} from "~/composables/auth.js";
 import {onMounted, ref} from "vue";
 
 const auth = authValidation()
@@ -20,14 +20,14 @@ onMounted(async () => {
     <main-nav></main-nav>
   </header>
 
-  <main class=" h-full  flex-1 flex flex-col bg-neutral-200 dark:bg-base-100 ">
+  <main class=" h-full flex-1 flex flex-col bg-neutral-200 dark:bg-base-100 ">
+    <div class="flex flex-col flex-1">
+      <NuxtPage></NuxtPage >
+    </div>
     <footer class="footer bg-gray-500 py-5 border-t-4 border-t-red-700">
       <div class="grid grid-cols-4 justify-center w-full text-gray-100">
         <div class="flex justify-center w-full">
           <span class="text-3xl">RP</span>
-        </div>
-        <div>
-          <NuxtPage></NuxtPage >
         </div>
         <div class="flex justify-center w-full">
           <div>

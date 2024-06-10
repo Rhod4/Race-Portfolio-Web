@@ -13,20 +13,20 @@ const props = defineProps({
     <div class="text-2xl mt-1">Sprint Race, Rally, Endurance, Oval</div>
     <div class="text-3xl mt-3 text-center">YOU CHOOSE HOW YOU WANT TO RACE</div>
     <div class="mt-10 flex " v-if="!user.id">
-      <RouterLink
+      <NuxtLink
           class="text-4xl font-bold mx-3 btn btn-lg btn-outline btn-warning flex hover:text-neutral"
           to="/auth">login
-      </RouterLink>
-      <RouterLink
+      </NuxtLink>
+      <NuxtLink
           class="text-4xl font-bold mx-3 btn btn-lg btn-outline btn-success flex"
           to="/auth/register">register
-      </RouterLink>
+      </NuxtLink>
     </div>
     <div class="mt-10" v-if="user.id">
-      <RouterLink
+      <NuxtLink
           class="text-4xl font-bold mx-3 btn btn-lg btn-outline btn-success flex"
           to="/Races">Race
-      </RouterLink>
+      </NuxtLink>
     </div>
   </div>
 </template>

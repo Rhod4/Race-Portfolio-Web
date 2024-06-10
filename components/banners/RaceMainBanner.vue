@@ -3,7 +3,7 @@
 import axios from "axios";
 import {onMounted, reactive, ref} from "vue";
 import RaceModal from "@/components/modals/RaceModal.vue";
-import {raceValidations} from "../../functions/races.js";
+import {raceValidations} from "~/composables/races.js";
 
 const raceVal = raceValidations()
 const races = reactive([]);
@@ -53,7 +53,7 @@ const ShowModal = (race) => {
           <div class="card bg-neutral-100 dark:bg-base-100 shadow-xl image-full z-10 mx-5"
                type="button"
           >
-            <figure><img :src="'/assets/images/games/' + race.game.id + '.png'"
+            <figure><img :src="'/img/games/' + race.game.id + '.png'"
                          class="blur p-4"
                          style="--tw-blur: blur(2px)" alt="IRacing"/>
             </figure>
@@ -62,7 +62,7 @@ const ShowModal = (race) => {
               <div class="card-actions justify-end mt-auto">
                 <div class="badge py-3 badge-success">
                   <span class="mr-2">0</span>
-                  <img src="/assets/images/misc/helmet.svg" class="max-w-[20px]"/>
+                  <img src="/img/misc/helmet.svg" class="max-w-[20px]"/>
                 </div>
               </div>
               <button class="btn btn-neutral" v-on:click="ShowModal(race)">Find Out More!</button>
@@ -94,7 +94,7 @@ const ShowModal = (race) => {
 
 }
 .banner-image {
-  background: url("/assets/images/misc/BannerImage.jpg") no-repeat center;
+  background: url("/img/misc/BannerImage.jpg") no-repeat center;
   filter: blur(4px) brightness(.7);
   clip-path: inset(0);
 }

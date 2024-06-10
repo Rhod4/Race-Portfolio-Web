@@ -1,5 +1,5 @@
-import axios, {AxiosResponse} from "axios";
-import {GameAdminResponse} from "../types/races/gamesAdminResponse";
+import type {GameAdminResponse} from "~/types/races/gamesAdminResponse";
+import axios, {type AxiosResponse} from "axios";
 
 export const gameValidation = () => {
 

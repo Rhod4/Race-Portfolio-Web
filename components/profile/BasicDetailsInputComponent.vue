@@ -4,7 +4,7 @@ import {computed, onMounted, reactive, ref} from "vue";
 import {helpers, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import {useAuthStore} from "../../stores/authStore.js";
-import {authValidation} from "../../functions/auth.js";
+import {authValidation} from "~/composables/auth.js";
 
 const authStore = useAuthStore();
 const auth = authValidation();
@@ -62,16 +62,16 @@ const AllowUpdateInfo = async () => {
       <span class="loading loading-dots"></span>
     </div>
     <div class="p-10 w-full flex-col">
-      <div class="w-full ">
+      <div class="w-full text-neutral-700 dark:text-base">
         <div class="grid grid-cols-2 border-b dark:border-gray-500 py-2">
-          <span class="my-auto">First Name: </span>
+          <span class="my-auto ">First Name: </span>
           <input
-              class="input input-bordered input-warning shadow-xl dark:bg-gray-700"
+              class="input input-bordered input-warning  bg-gray-200 dark:bg-gray-700"
               v-model="userDetails.firstname"
               placeholder="Please Enter"
               v-show="updating">
           <span
-              class="input flex items-center dark:bg-gray-700"
+              class="input flex items-center bg-gray-200 dark:bg-gray-700"
               v-show="!updating">
             {{ userDetails.firstname }}
           </span>
@@ -79,24 +79,24 @@ const AllowUpdateInfo = async () => {
         <div class="grid grid-cols-2 border-b dark:border-gray-500 py-2">
           <span class="my-auto">Last Name: </span>
           <input
-              class="input input-bordered input-warning dark:bg-gray-700"
+              class="input input-bordered input-warning bg-gray-200 dark:bg-gray-700"
               v-model="userDetails.lastname"
               placeholder="Please Enter"
               v-show="updating">
           <span
-              class="input flex items-center dark:bg-gray-700"
+              class="input flex items-center bg-gray-200 dark:bg-gray-700"
               v-show="!updating">
             {{userDetails.lastname}}
           </span>
         </div>
         <div class="grid grid-cols-2">
           <span class="my-auto">Email: </span>
-          <span class="input flex items-center dark:bg-gray-700"> {{ userDetails.email }}</span>
+          <span class="input flex items-center bg-gray-200 dark:bg-gray-700"> {{ userDetails.email }}</span>
         </div>
       </div>
     </div>
     <div class="flex w-full justify-end px-5">
-      <button class="btn btn-warning" :class="updating ? 'mr-2' : ''" v-on:click="AllowUpdateInfo()">Edit Info
+      <button class="btn btn-warning" :class="updating ? 'mr-2' : ''" v-on:click="AllowUpdateInfo()">{{!updating ? 'Edit Info' : 'Cancel'}}
       </button>
       <button class="btn btn-success" v-show="updating" v-on:click="EditDetails()">Update Info</button>
     </div>
