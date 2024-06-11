@@ -55,7 +55,7 @@ export const authValidation = () => {
                showConfirmButton: false,
                timer: 1500,
             })
-            // router.push('/Account/RoleSelector')
+         navigateTo('/role')
          }
       ).catch((error) => {
          console.log(error)

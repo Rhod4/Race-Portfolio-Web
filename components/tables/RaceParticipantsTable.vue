@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <div>
-    <table class="table">
+    <table class="table text-black dark:text-base-100">
       <thead>
       <tr>
         <th>

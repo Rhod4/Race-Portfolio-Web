@@ -129,7 +129,19 @@ export const raceValidations = () => {
          return []})
    }
 
+   const getUserRaces = async () => {
+      return await axios.get('/api/Race/GetRacesForLoggedInUser', {
+         withCredentials: true,
+      })
+         .then(response => {
+            return response.data
+         })
+         .catch(e => {
+            console.log(e)
+   })
+   }
+
    return {getRaces, getRace, getRaceCards, getDashboardRaces, addToRace,
       removedFromRace, checkIfRacing, getParticipants,
-      getCarsForSeries}
+      getCarsForSeries, getUserRaces}
 }

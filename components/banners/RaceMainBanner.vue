@@ -62,7 +62,7 @@ const ShowModal = (race) => {
               <div class="card-actions justify-end mt-auto">
                 <div class="badge py-3 badge-success">
                   <span class="mr-2">0</span>
-                  <img src="/img/misc/helmet.svg" class="max-w-[20px]"/>
+                  <img src="/img/misc/raceHelmet.svg" class="max-w-[20px]"/>
                 </div>
               </div>
               <button class="btn btn-neutral" v-on:click="ShowModal(race)">Find Out More!</button>

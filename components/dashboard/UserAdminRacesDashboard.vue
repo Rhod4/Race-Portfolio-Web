@@ -44,7 +44,7 @@ const removeRace = async (raceId: string) => {
         </div>
       </div>
       <div class="flex pt-3 ps-4">
-        <table class="table table-fixed">
+        <table class="table table-fixed ">
           <thead>
           <tr>
             <th>Name</th>
@@ -53,7 +53,7 @@ const removeRace = async (raceId: string) => {
           </tr>
           </thead>
           <tbody>
-          <tr v-for="race in userRaces">
+          <tr v-for="race in userRaces" class="text-neutral-700 dark:text-base-100">
             <td>{{race.name}}</td>
             <td>{{new Date(race.raceDate).toLocaleDateString()}}</td>
             <td class="flex justify-end">

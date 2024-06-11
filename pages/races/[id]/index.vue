@@ -24,14 +24,11 @@ const showAddToRaceModal = async () => {
 
 const addToRace = async () => {
   await raceValidate.addToRace(route.params.id, 1, selectedCar.value).then((res) => {
-    reloadNuxtApp();})
-
+    raceValidate.getRace(route.params.id)})
 }
 
 const RemoveFromRace = async () => {
-  await raceValidate.removedFromRace(route.params.id).then(() => reloadNuxtApp())
-
-  ;
+  await raceValidate.removedFromRace(route.params.id).then(() => reloadNuxtApp());
 }
 
 const getParticipants = async () => {

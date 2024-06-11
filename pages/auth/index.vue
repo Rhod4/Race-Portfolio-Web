@@ -23,9 +23,7 @@ watch(() => props.accountType, () => {
     <div class="flex flex-col p-5 m-auto justify-center items-center shadow-2xl rounded-xl h-fit">
       <LoginComponent v-show="isLogin === 'login'" />
       <RegisterComponent v-show="isLogin === 'register'" />
-      <div v-show="isLogin === 'RoleSelector'">
         asd
       </div>
     </div>
-  </div>
 </template>
