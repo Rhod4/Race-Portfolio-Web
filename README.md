@@ -20,6 +20,22 @@ Hosting will also be investigated but if done, would have to come at a cost
 
 ---
 
+The project was originally made with vue, but then converted to be
+a nuxt.js based project. Due to this, some of the structure
+will need to be revamped
+
+This project uses:
+- vue3
+- nuxt.js
+- typescript
+- vuelidate
+- DaisyUi
+- Pinia
+- SweetAlert2
+- Axios
+
+---
+
 Completed Areas:
 - account creation
 - viewing races
@@ -43,22 +59,6 @@ Upcoming Features:
 - race scores (e.g. safety rating)
 
 These are just a few planned features, with many more to come
-
----
-
-The project was originally made with vue, but then converted to be
-a nuxt.js based project. Due to this, some of the structure 
-will need to be revamped
-
-This project uses:
-- vue3
-- nuxt.js
-- typescript
-- vuelidate
-- DaisyUi
-- Pinia
-- SweetAlert2
-- Axios
 
 ---
 # Setup Project
