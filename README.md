@@ -2,7 +2,7 @@
 
 This is the frontend for the Race Portfolio project [WIP]
 
-**This project is very much in the work in progress stage**
+**This project is in the work in progress stage**
 
 ---
 
