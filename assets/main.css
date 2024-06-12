@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+html,
+body {
+  height: 100%;
+}
+
+#app,
+#__nuxt {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.input-error {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
+.error-msg {
+  color: theme("colors.red.700");
+}
+
+table thead tr {
+  color: theme("colors.neutral");
+}
+
+/*# sourceMappingURL=main.css.map */
