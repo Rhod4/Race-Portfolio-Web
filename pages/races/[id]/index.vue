@@ -1,11 +1,11 @@
 <script setup>
 
-import {raceValidations} from "~/composables/races.js";
+import {userRaceRequests} from "~/composables/races.ts";
 import {onMounted, reactive, ref, watch} from "vue";
 import RaceParticipantsTable from "../../../components/tables/RaceParticipantsTable.vue";
 
 const route = useRoute()
-const raceValidate = raceValidations()
+const raceValidate = userRaceRequests()
 
 const race = reactive({})
 

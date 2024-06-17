@@ -3,9 +3,9 @@
 import axios from "axios";
 import {onMounted, reactive, ref} from "vue";
 import RaceModal from "@/components/modals/RaceModal.vue";
-import {raceValidations} from "~/composables/races.js";
+import {userRaceRequests} from "~/composables/races.ts";
 
-const raceVal = raceValidations()
+const raceVal = userRaceRequests()
 const races = reactive([]);
 
 const loading = ref(true);

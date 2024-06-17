@@ -1,15 +1,11 @@
 <script setup>
 
 import {onMounted, reactive, ref} from "vue";
-import {raceValidations} from "~/composables/races.js";
 import SearchBar from "../../components/navigation/SearchBar.vue";
-import {useAuthStore} from "../../stores/authStore.js";
 import RaceModal from "../../components/modals/RaceModal.vue";
 import RaceCard from "../../components/cards/RaceCard.vue";
 
-const raceVal = raceValidations()
-
-const authStore = useAuthStore()
+const raceRequests = userRaceRequests()
 
 const data = reactive({races: []});
 const modalData = reactive({})
@@ -22,7 +18,7 @@ const handleSearch = (val) => {
 }
 
 onMounted(async () => {
-  data.races = await raceVal.getRaceCards()
+  data.races = await raceRequests.getRaces(25)
 })
 
 const ShowModal = (race) => {
@@ -42,7 +38,7 @@ const ShowModal = (race) => {
       <div class="grid grid-cols-3 gap-2">
         <div
             v-for="race in data.races.filter(val => searchFilter !== '' ? val.name.includes(searchFilter) : val )">
-              <RaceCard :race="race"/>
+              <RaceCard :race="race" @show-modal="ShowModal"/>
         </div>
       </div>
     </div>

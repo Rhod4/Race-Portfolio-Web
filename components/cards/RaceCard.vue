@@ -6,11 +6,9 @@ const props = defineProps({
     race: {}
 })
 
-const authStore = useAuthStore()
+const emit =defineEmits(["ShowModal"]);
 
-onMounted(() => {
-  console.log(props.race)
-})
+const authStore = useAuthStore()
 
 </script>
 
@@ -33,7 +31,7 @@ onMounted(() => {
           <img src="/img/misc/helmet.svg" class="max-w-[20px]" alt="racers"/>
         </div>
       </div>
-      <button class="btn btn-neutral" v-on:click="ShowModal(race)" v-if="!authStore.user.id">Find Out More!</button>
+      <button class="btn btn-neutral" v-on:click="emit('ShowModal', race)" v-if="!authStore.user.id">Find Out More!</button>
       <NuxtLink class="btn btn-neutral" :to="'/races/'+race.id" v-if="authStore.user.id">View Race</NuxtLink>
     </div>
   </div>

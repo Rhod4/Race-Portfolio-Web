@@ -1,12 +1,14 @@
 import axios from "axios";
 import {useAuthStore} from "../stores/authStore.js";
 import Swal from "sweetalert2";
+import type {raceResponse} from "~/types/races/raceResponse";
 
-export const raceValidations = () => {
-   const authstore = useAuthStore()
+export const userRaceRequests = () => {
 
-   const getRaces = async () => {
-      return await axios.get("api/Race/Races/", { withCredentials: true})
+   const authStore = useAuthStore()
+
+   const getRaces = async (page: number): Promise<raceResponse[]> => {
+      return await axios.get(`api/Race/Races/${page}`, { withCredentials: true})
          .then(response => {
             return response.data;
          })
@@ -16,7 +18,7 @@ export const raceValidations = () => {
    }
 
    const getDashboardRaces = async () => {
-      return await axios.get("api/Race/Races/" + 2, { withCredentials: true})
+      return await axios.get(`api/Race/Races/${2}`, { withCredentials: true})
          .then(response => {
             return response.data;
          })
@@ -25,17 +27,7 @@ export const raceValidations = () => {
          });
    }
 
-   const getRaceCards = async () => {
-      return await axios.get("api/Race/RaceCards")
-         .then(response => {
-            return response.data;
-         })
-         .catch(error => {
-            console.error("There was a problem with the Axios request:", error);
-         });
-   }
-
-   const getRace = async (id) => {
+   const getRace = async (id: string) => {
       return await axios.get(`api/Race/Race/${id}`, { withCredentials: true})
          .then(response => {
             return response.data;
@@ -45,8 +37,8 @@ export const raceValidations = () => {
          });
    }
 
-   const addToRace = async (raceId, raceNumber, carId) => {
-      if(authstore.user.firstname === "" || authstore.user.lastname === ""){
+   const addToRace = async (raceId: string, raceNumber: number, carId: string) => {
+      if(authStore.user.firstname === "" || authStore.user.lastname === ""){
          return await basicDetailsMissing()
       }
       return await axios.post("api/Race/ParticipateInRace", null , {
@@ -64,7 +56,7 @@ export const raceValidations = () => {
             console.error("There was a problem with the Axios request:", error);
          });
    }
-   const removedFromRace = async (raceId) => {
+   const removedFromRace = async (raceId: string) => {
       return await axios.post(`api/Race/RemoveParticipateInRace/${raceId}`, null , {
          withCredentials: true,
       })
@@ -76,7 +68,7 @@ export const raceValidations = () => {
          });
    }
 
-   const checkIfRacing = async (raceId) => {
+   const checkIfRacing = async (raceId: string) => {
       return await axios.post(`api/Race/AlreadyRacing/${raceId}`, null, {
          withCredentials: true,
       })
@@ -89,12 +81,11 @@ export const raceValidations = () => {
          });
    }
 
-   const getParticipants = async (raceId) => {
-      return await axios.get(`api/Race/GetParticipants/${raceId}`, null, {
+   const getParticipants = async (raceId: string) => {
+      return await axios.get(`api/Race/GetParticipants/${raceId}`, {
          withCredentials: true,
       })
          .then(response => {
-            console.log(response.data)
             return response.data
          })
          .catch(error => {
@@ -117,7 +108,7 @@ export const raceValidations = () => {
       )
    }
 
-   const getCarsForSeries = async (gameId) => {
+   const getCarsForSeries = async (gameId: string) => {
       return await axios.get(`/api/Series/GetSeriesAndCarsByGame/${gameId}`, {
          withCredentials: true,
       })
@@ -141,7 +132,7 @@ export const raceValidations = () => {
    })
    }
 
-   return {getRaces, getRace, getRaceCards, getDashboardRaces, addToRace,
+   return {getRaces, getRace, getDashboardRaces, addToRace,
       removedFromRace, checkIfRacing, getParticipants,
       getCarsForSeries, getUserRaces}
 }

@@ -1,10 +1,10 @@
 <script setup>
-  import {raceValidations} from "~/composables/races.js";
+  import {userRaceRequests} from "~/composables/races.ts";
   import {onMounted} from "vue";
 
   const races = ref();
 
-  const raceValidate = raceValidations()
+  const raceValidate = userRaceRequests()
 
   onMounted(async () => {
     races.value = await raceValidate.getUserRaces()
