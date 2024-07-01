@@ -1,8 +1,7 @@
 <script setup>
-import {useAuthStore} from "../../stores/authStore.js";
-import {onMounted} from "vue";
+import {useAuthStore} from "~/stores/authStore.js";
 
-const props = defineProps({
+defineProps({
     race: {}
 })
 

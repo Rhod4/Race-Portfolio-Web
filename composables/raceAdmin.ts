@@ -1,11 +1,15 @@
-import axios from "axios";
 import type {CreateRaceRequest} from "~/types/races/createRace";
+import type {Race, Track} from "~/types/races/raceType";
+import type {Series} from "~/types/series/seriesType";
+import axios from "axios";
 
 export const raceAdminValidation = () => {
 
-    const getAdminRacesForUser = async (): Promise<any> => {
+    const getAdminRacesForUser = async (): Promise<Race[]> => {
         return axios.get("/api/AdminRace/GetAdminRacesForLoggedInUser", {withCredentials: true})
-            .then(response => response.data)
+            .then(response =>
+                response.data
+            )
     }
 
     const createOrEditRace = async (createRaceRequest: CreateRaceRequest): Promise<any> => {
@@ -16,22 +20,23 @@ export const raceAdminValidation = () => {
             })
     }
 
-    const removeRace = async (raceId: string): Promise<any> => {
+    const removeRace = async (raceId: string): Promise<boolean> => {
         console.log(raceId);
         return axios.delete(`/api/AdminRace/RemoveRace/${raceId}`, {withCredentials: true})
-            .then(response => {
-                console.log(response);
-            })
+            .then(() => true)
+            .catch(() => false)
     }
 
-    const getSeriesForGame = async (gameId: string): Promise<any> => {
+    const getSeriesForGame = async (gameId: string): Promise<Series[]> => {
         return await axios.get(`/api/Series/GetSeriesByGame/${gameId}`)
             .then(response =>
-                response.data
-            )
+            {
+                console.log(response.data)
+                return response.data
+    })
     }
 
-    const getTracksForGame = async (gameId: string): Promise<any> => {
+    const getTracksForGame = async (gameId: string): Promise<Track[]> => {
         return await axios.get(`/api/Track/AllTracksByGame/${gameId}`)
             .then(response =>
                 response.data

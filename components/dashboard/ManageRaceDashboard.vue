@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import {raceAdminValidation} from "~/composables/raceAdmin";
-import {onMounted, reactive, ref, watch} from "vue";
+import {onMounted, reactive, type Ref, ref, watch} from "vue";
 import {gameValidation} from "~/composables/games";
 import {type CreateRaceRequest} from "@/types/races/createRace";
-import {type GameAdminResponse} from "@/types/races/gamesAdminResponse";
+import {type Race, type Track} from "~/types/races/raceType";
+import type {Series} from "~/types/series/seriesType";
 
 const raceAdmin = raceAdminValidation()
 
@@ -25,9 +26,9 @@ const race = reactive<CreateRaceRequest>({
 const gameVal = gameValidation();
 
 const loading = ref(true);
-const games = ref(<GameAdminResponse>[])
-const seriesList = ref([])
-const tracks = ref([])
+const games: Ref<Race[]> = ref([])
+const seriesList: Ref<Series[]> = ref([])
+const tracks: Ref<Track[]> = ref([])
 
 watch(() => race.GameId, async () => {
   if (race.GameId) {

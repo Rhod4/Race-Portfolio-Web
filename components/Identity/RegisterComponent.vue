@@ -1,8 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import {email, helpers, required, sameAs} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
 import {computed, reactive} from "vue";
-import {authValidation} from "~/composables/auth.js";
 
 const auth = authValidation();
 

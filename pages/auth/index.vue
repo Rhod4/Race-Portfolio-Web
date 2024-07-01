@@ -1,29 +1,22 @@
 <script setup>
 import LoginComponent from "../../components/Identity/LoginComponent.vue";
-import {ref, watch} from "vue";
+import {ref} from "vue";
 import RegisterComponent from "../../components/Identity/RegisterComponent.vue";
 
-const props = defineProps({
-  accountType: {
-    type: String,
-    default: "login"
-  }
-})
 
-const isLogin = ref(props.accountType);
+const isRegister = ref(useRoute().query["register"]);
 
-watch(() => props.accountType, () => {
-  isLogin.value = props.accountType
+watch(() => useRoute().query["register"], () => {
+  isRegister.value = useRoute().query["register"]
 })
 
 </script>
 
 <template>
-  <div class="div-center">
+  <div class="div-center flex flex-1">
     <div class="flex flex-col p-5 m-auto justify-center items-center shadow-2xl rounded-xl h-fit">
-      <LoginComponent v-show="isLogin === 'login'" />
-      <RegisterComponent v-show="isLogin === 'register'" />
-        asd
+      <LoginComponent v-show="isRegister !== 'true'" />
+      <RegisterComponent v-show="isRegister === 'true'" />
       </div>
     </div>
 </template>

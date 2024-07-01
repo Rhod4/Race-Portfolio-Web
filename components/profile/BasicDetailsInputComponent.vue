@@ -1,27 +1,27 @@
-<script setup>
+<script setup lang="ts">
 
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {helpers, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
-import {useAuthStore} from "../../stores/authStore.js";
-import {authValidation} from "~/composables/auth.js";
+import type {ProfileUpdate} from "~/types/profile/profileUpdateType.js";
+import {useAuthStore} from "~/stores/authStore";
 
 const authStore = useAuthStore();
 const auth = authValidation();
 
-const userDetails = reactive({
+const userDetails = ref({
   firstname: "",
   lastname: "",
   email: ""
-})
+} as ProfileUpdate)
 
 const loadingData = ref(true)
 
 const loadUser = async () => {
   await auth.checkLogin().finally(()=> loadingData.value = false)
-  userDetails.firstname = authStore.user.firstname
-  userDetails.lastname = authStore.user.lastname
-  userDetails.email = authStore.user.email
+  userDetails.value.firstname = authStore.user.firstname?? ''
+  userDetails.value.lastname = authStore.user.lastname?? ''
+  userDetails.value.email = authStore.user.email?? ''
 }
 
 const rules = computed(() => ({
@@ -43,7 +43,7 @@ const v$ = useVuelidate(rules, userDetails)
 const EditDetails = async () => {
 
   if (await v$.value.$validate()) {
-    await auth.postProfileData(userDetails)
+    await auth.postProfileData(userDetails.value)
   }
 }
 const updating = ref(false);

@@ -1,7 +1,6 @@
-<script setup>
-  import {useAuthStore} from "../../stores/authStore.js";
-  import {computed, ref, watch} from "vue";
-  import {authValidation} from "~/composables/auth.js";
+<script setup lang="ts">
+  import {computed,} from "vue";
+  import {useAuthStore} from "~/stores/authStore";
 
   const auth = authValidation();
 
@@ -10,8 +9,8 @@
   }
   const authStore = useAuthStore()
 
-  const profileName = computed(() =>{
-    if(authStore.user.firstname !== undefined || authStore.user.lastname !== undefined)
+  const profileName : any = computed(() =>{
+    if(authStore.user.firstname != null || authStore.user.lastname != null)
       return authStore.user.firstname + " " + authStore.user.lastname
 
       return profileName.value = "Profile"

@@ -2,7 +2,7 @@
 
 import './assets/main.css'
 import MainNav from "../components/navigation/MainNav.vue";
-import {authValidation} from "~/composables/auth.js";
+import {authValidation} from "~/composables/auth.ts";
 import {onMounted, ref} from "vue";
 
 const auth = authValidation()

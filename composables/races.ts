@@ -2,6 +2,7 @@ import axios from "axios";
 import {useAuthStore} from "../stores/authStore.js";
 import Swal from "sweetalert2";
 import type {raceResponse} from "~/types/races/raceResponse";
+import type {RaceCards} from "~/types/races/raceCardType";
 
 export const userRaceRequests = () => {
 
@@ -17,7 +18,7 @@ export const userRaceRequests = () => {
          });
    }
 
-   const getDashboardRaces = async () => {
+   const getDashboardRaces = async (): Promise<RaceCards[]> => {
       return await axios.get(`api/Race/Races/${2}`, { withCredentials: true})
          .then(response => {
             return response.data;
@@ -102,7 +103,7 @@ export const userRaceRequests = () => {
          customClass: {popup: "dark:bg-base-100 dark:text-white", }
       }).then((response) => {
             if(response.isConfirmed){
-               // router.push("/Profile")
+               // router.push("/profile")
             }
          }
       )

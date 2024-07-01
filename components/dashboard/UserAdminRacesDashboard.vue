@@ -2,22 +2,24 @@
 
 
 import {raceAdminValidation} from "~/composables/raceAdmin";
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, ref} from "vue";
 import ManageRace from "@/components/dashboard/ManageRaceDashboard.vue";
+import type {Race} from "~/types/races/raceType";
 
 const raceAdmin = raceAdminValidation()
-const userRaces = ref([])
+const userRaces = ref<Race[]>([])
 const selectedRace = ref()
 const state = ref<number>(0);
 
-const races = async (): Promise<any> => {
-  userRaces.value = await raceAdmin.getAdminRacesForUser();
+const races = async (): Promise<void> => {
+  userRaces.value = await raceAdmin.getAdminRacesForUser()
+  console.log( userRaces.value)
 }
 onMounted(() => {
   races();
 })
 
-const manageUserRace = (race?: any) => {
+const manageUserRace = (race?: Race) => {
   selectedRace.value = race;
   state.value = 1;
 }

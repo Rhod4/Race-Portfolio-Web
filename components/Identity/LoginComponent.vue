@@ -1,8 +1,7 @@
-<script setup>
+<script setup lang="ts">
 import {computed, reactive, ref} from "vue";
 import {email, helpers, required} from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
-import {authValidation} from "~/composables/auth.js";
 
 const login = reactive({
   email: "",
@@ -29,7 +28,6 @@ const postLogin = async () => {
 
   if (await v$.value.$validate()){
     const data = await auth.postLogin(login)
-    console.log(data)
     if(data === 401)
       error.value = true
   }
@@ -75,7 +73,7 @@ const postLogin = async () => {
     </form>
     <div class="mt-2">
       <NuxtLink class="btn text-center btn-ghost w-full"
-                  to="/Account/register"
+                  to="/auth?register=true"
       >
         Dont have an account?
       </NuxtLink>

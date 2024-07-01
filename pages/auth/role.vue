@@ -21,9 +21,9 @@ const roles = ref([
     </div>
   </div>
   <div class="flex flex-1 w-full h-full justify-around items-center">
-    <NuxtLink class="w-1/5" to="/"
+    <NuxtLink class="w-1/5 hover:w-1/4" to="/"
               v-for="role in roles">
-    <div class="card border border-gray-300 w-full h-[250px] bg-neutral-200 shadow-xl image-full">
+    <div class="card border border-gray-300 w-full h-[250px] hover:h-[275px] bg-neutral-200 shadow-xl image-full">
       <figure>
         <img :src="role.image" alt="role select background image"
           class=""

@@ -1,12 +1,11 @@
-<script setup>
+<script setup lang="ts">
 
-import axios from "axios";
-import {onMounted, reactive, ref} from "vue";
+import {onMounted, type Ref, ref} from "vue";
 import RaceModal from "@/components/modals/RaceModal.vue";
-import {userRaceRequests} from "~/composables/races.ts";
+import type {RaceCard} from "~/types/races/raceCardType";
 
 const raceVal = userRaceRequests()
-const races = reactive([]);
+const races: Ref<RaceCard[]> = ref([]);
 
 const loading = ref(true);
 
@@ -19,15 +18,15 @@ onMounted(async () => {
       setTimeout(() => loading.value = false, 2000)
   )
 
-  races.push(...racesFromApi)
+  races.value.push(...racesFromApi)
 });
 
-const modalData = reactive({})
+const modalData: Ref<RaceCard> = ref({} as RaceCard)
 
 const RaceModalRef = ref("RaceModalRef")
 
-const ShowModal = (race) => {
-  modalData.data = race
+const ShowModal = (race: RaceCard) => {
+  modalData.value = race
   RaceModalRef.value.ShowModal();
 }
 
@@ -73,13 +72,13 @@ const ShowModal = (race) => {
     </div>
     <div
         class="flex items-center h-full my-auto justify-center"
-        v-if="loading === true">
+        v-if="loading">
       <div>
         <span class="loading loading-dots loading-lg text-neutral"></span></div>
     </div>
   </div>
 
-  <race-modal ref="RaceModalRef" :raceProp="modalData.data"></race-modal>
+  <race-modal ref="RaceModalRef" :raceProp="modalData"></race-modal>
 </template>
 
 <style scoped>

@@ -1,10 +1,14 @@
-<script setup>
-  import {reactive} from "vue";
-  import {useAuthStore} from "../../stores/authStore.js";
+<script setup lang="ts">
+  import {useAuthStore} from "~/stores/authStore";
+  import type {Race} from "~/types/races/raceType";
+  import type {PropType} from "vue";
+
   const authStore = useAuthStore()
 
   const props = defineProps({
-    raceProp : {},
+    raceProp: {
+      type: {} as PropType<Race>
+    },
     loggedIn:  {
       type: Boolean,
       required: false
@@ -15,7 +19,7 @@
 
   function ShowModal(){
     console.log(props.raceProp)
-    document.getElementById('race-modal').showModal()
+    document.getElementById('race-modal')?.showModal()
   }
 
 
@@ -36,7 +40,7 @@
             <div class="badge badge-success text-neutral-200 mx-1 p-3">P-Q-R</div>
             <div class="badge badge-success text-neutral-200 mx-1 p-3">Any Rating</div>
           </div>
-          <div class="" v-if="raceProp?.raceSeries.length > 0">
+          <div class="" v-if="raceProp!.raceSeries.length > 0">
             <span class="text-neutral dark:text-neutral-200">
               Race Series:
             </span>
